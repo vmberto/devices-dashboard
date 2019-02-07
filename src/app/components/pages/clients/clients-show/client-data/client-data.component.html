@@ -1,0 +1,78 @@
+<div class="panel">
+
+  <div class="panel-head">
+    <button routerLink="../.." class="return-btn btn btn-primary btn-sm">
+      <i class="fa fa-arrow-left"></i>
+    </button>
+    <h4 class="panel-title">
+      Cliente {{ client.name }}
+    </h4>
+
+  </div>
+
+
+  <div class="panel-body">
+
+    <div class="row">
+
+      <div class="col-md-4">
+        <label class="data-name">Contato</label>
+        <p>{{ client.phone }}</p>
+      </div>
+
+
+      <div class="col-md-4">
+        <label class="data-name">CEP</label>
+        <p>{{ client.address.zipCode }}</p>
+      </div>
+
+
+      <div class="col-md-4">
+
+        <label class="data-name">Cidade</label>
+        <p>{{ client.address.city }}</p>
+
+      </div>
+
+      <div class="col-md-4">
+
+        <label class="data-name">Bairro</label>
+        <p>{{ client.address.district }}</p>
+
+      </div>
+
+      <div class="col-md-4">
+        <label class="data-name">Rua</label>
+        <p>{{ client.address.street }}</p>
+      </div>
+
+      <div class="col-md-4">
+        <label class="data-name">Número</label>
+        <p>{{ client.address.number }}</p>
+      </div>
+
+      <div [hidden]="!client.address.complement" class="col-md-4">
+
+        <label class="data-name">Complemento</label>
+        <p>{{ client.address.complement }}</p>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+  <div class="card-footer">
+
+    <div class="row">
+      <div class="col-md-12">
+        <p class="timestamps"><span>Cadastrado em: </span>{{client.createdAt | date:'dd/MM/yyyy'}}</p>
+      </div>
+    </div>
+
+  </div>
+
+
+
+</div>

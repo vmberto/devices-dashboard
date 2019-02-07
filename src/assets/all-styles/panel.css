@@ -1,0 +1,33 @@
+.panel{
+    margin-top: 15px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+}
+
+.panel-body {
+    padding: 0 30px 40px 30px; 
+}
+  
+.panel-head {
+    padding: 10px 20px 10px 20px; 
+    background-color: rgba(0,0,0,.03);
+    margin-bottom: 20px;
+}
+
+.panel-title {
+    display: inline;
+    font-weight: 800!important;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 0;
+
+}
+
+.return-btn {
+    display: inline-block;
+    margin-top: 5px;
+    transform: translateY(-10%);
+}
+  

@@ -1,0 +1,21 @@
+<div class="card card-stats" style="border: 3px solid var(--success)">
+    <div class="card-body">
+        <div class="numbers">
+            <p class="card-category">{{cardTitle}}</p>
+
+            <h3 class="card-title">
+                <ng2-odometer [format]="'d'" [number]="cardData"></ng2-odometer>
+            </h3>
+        </div>
+        <div class="card-footer">
+            <div class="stats">
+                <div>
+                    <p class="card-footer-title">
+                        <i class="text-success fa fa-check mr-2"></i>
+                        <ng2-odometer [format]="'d'" [number]="cardData"></ng2-odometer>
+                        pacientes ativos
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,113 @@
+.panel-head {
+  background: var(--darker-color);
+  border-bottom: 2px solid var(--primary);
+  padding: 11px;
+
+}
+.panel-title {
+  font-weight: 300;
+  font-size: 19px;
+  margin: 0;
+  text-align: center;
+}
+
+.full-radius {
+  border-radius: 10px!important;
+}
+
+.no-radius {
+  border-radius: 0!important;
+}
+
+.no-bottom-radius {
+  border-radius: 10px 10px 0 0!important;
+}
+
+.no-top-radius {
+  border-radius: 0 0 10px 10px!important;
+}
+
+.expansive-panel:visited,
+.expansive-panel:active,
+.expansive-panel,
+.expansive-panel-no-session {
+  transition: 100ms;
+  padding: 15px;
+  background: var(--darker-color);
+  border-bottom: 1px solid var(--main-color);
+  overflow: hidden;
+}
+#humour { text-align: left; }
+#first-session { 
+  text-align: left;
+  color: var(--primary)!important;
+}
+#attendance_at { 
+  font-size: .70rem;
+  text-align: right;
+  line-height: 17px;
+ }
+
+.expansive-panel h4 {
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 700!important;
+  font-size: .9rem;
+  margin: 0;
+}
+@media only screen and (max-width: 575px) {
+  #humour,
+  #first-session,
+  #attendance_at { text-align: center; }
+}
+
+.expansive-panel-no-session {
+  border: none!important;
+  border-radius: 10px!important;
+}
+
+.expansive-panel:hover {
+  background: var(--darker-color-selected);
+}
+
+.selected-panel {
+  background: var(--darker-color-selected);
+  border-bottom: 1px solid var(--main-color)
+}
+
+.expansive-panel-good {
+  border-right: 7.85px solid var(--success)
+}
+
+.expansive-panel-medium {
+  border-right: 7.85px solid var(--warning)
+}
+
+.expansive-panel-bad {
+  border-right: 7.85px solid var(--danger)
+}
+
+.expanded {
+  height: auto;
+}
+
+.expanded p {
+  border: 3px solid var(--darker-color);
+  font-size: .88rem;
+  margin-top: 10px;
+  height: 100%;
+  padding: 20px 10px 20px 10px;;
+  margin-bottom: 0;
+}
+
+.sessions-action {
+  float: right;
+  transform: translateY(-80%);
+}
+
+@media only screen and (max-width: 474px) {
+  .sessions-action {
+    float: none;
+    transform: translateY(0);
+  }
+}

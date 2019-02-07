@@ -1,0 +1,36 @@
+<div class="title">
+  <img class="title-logo" src="../../../../assets/img/salvus-logo.PNG">
+</div>
+
+<div class="nav-container">
+  <h4 class="username">{{userData.name}}</h4>
+  <ul class="nav">
+    <li *ngFor="let menuItem of menuItems">
+
+      <a class="sidebar-link" *ngIf="!menuItem.children" [routerLink]="menuItem.path" routerLinkActive="selected">
+        <i [class]="menuItem.icon" style="padding: 15px;"></i>{{menuItem.title}}
+      </a>
+
+
+      <a class="sidebar-link" *ngIf="menuItem.children" (click)="menuItem.subMenuOpen = !menuItem.subMenuOpen" class="pointer" routerLinkActive="selected">
+          <i [class]="menuItem.icon" style="padding: 15px;"></i>
+            {{menuItem.title}}
+          <i class="fa fa-caret-right subMenu-arrow" [ngClass]="{'subMenu-open': menuItem.subMenuOpen}"></i>
+      </a>
+      
+
+      <ul [@collapse] *ngIf="menuItem.subMenuOpen" class="subMenu">
+        <li *ngFor="let subMenuItem of menuItem.children">
+            <a class="sidebar-link" [routerLink]="subMenuItem.path" routerLinkActive="selected">
+                <i [class]="subMenuItem.icon" style="padding: 15px;"></i>{{subMenuItem.title}}
+            </a>
+        </li>
+      </ul>
+
+
+    </li>
+    <li>
+      <a class="sidebar-link pointer" (click)="logout()"><i class="fa fa-sign-out" style="padding: 15px"></i>Sair</a>
+    </li>
+  </ul>
+</div>

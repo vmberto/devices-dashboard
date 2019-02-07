@@ -1,0 +1,58 @@
+@import '~@angular/cdk/overlay-prebuilt.css';
+
+@import './assets/all-styles/table.css';
+@import './assets/all-styles/panel.css';
+@import './assets/all-styles/utils.css';
+
+:root {
+  --main-color: #f8f9fe;
+  --lighter-color: #fff;
+
+  --secondary-color: #00A24C;  
+  
+
+  
+  --font-color: #e7e7e7;
+  --font-subcolor: #757e8a;
+  --darker-font-color: #383F48;
+
+  --primary-selected: #00448d;
+
+
+  --primary: #00A24C!important;
+
+  --success-color: #00B243;
+  --danger-color: #FF2419;
+  --info-color: #19b0c7 ;
+  
+
+  --box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+
+body{
+  background-color: var(--main-color)!important;
+  font-family: Roboto, "Helvetica Neue", sans-serif!important;
+
+}
+
+h1, h2, h3, h4, h5, p, span, small, tr, td, th, label {
+  font-weight: 400!important;
+}
+
+p {
+  word-break: break-all;
+}
+
+
+
+  /* ----- Classes ----- */
+
+.sidebar-link {
+  color: white!important;
+}
+
+.btn-primary {
+  background: var(--primary)!important;
+  border-color: var(--primary)!important;
+}

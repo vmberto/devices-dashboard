@@ -1,0 +1,108 @@
+<div class="row">
+  <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12">
+
+    <div class="panel">
+
+      <div class="panel-head">
+        <button routerLink=".." class="return-btn btn btn-primary btn-sm">
+          <i class="fa fa-arrow-left"></i>
+        </button>
+        <h4 class="panel-title">
+          Cadastrar Cliente
+        </h4>
+
+      </div>
+
+
+      <div class="panel-body">
+        <form [formGroup]="patientForm" (submit)="submitPatientData()">
+
+          <div class="form-row">
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Nome</label>
+                <input formControlName="name" type="text" class="form-control" placeholder="Umberto Barros">
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Celular<small> &mdash; Opcional</small></label>
+                <input formControlName="phone" type="text" class="form-control" placeholder="99999 9999">
+              </div>
+            </div>
+
+          </div>
+
+
+          <h5>Endereço</h5>
+
+          <div class="form-row">
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>CEP</label>
+                <input id="address-zip_code" formControlName="zip_code" (blur)="findCep()" type="text" class="form-control"
+                  placeholder="00000-000" maxlength="8">
+                <button [@fade] type="button" class="pointer finding-cep" *ngIf="findingCep || cepFound" (click)="clearSelectedAddress()">
+                  <i class="fa" [ngClass]="{'fa-spinner': findingCep, 'fa-spin': findingCep, 'fa-times': cepFound}"></i>
+                </button>
+              </div>
+            </div>
+
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Cidade</label>
+                <input id="address-city" formControlName="city" type="text" class="form-control" placeholder="Recife">
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Bairro</label>
+                <input id="address-district" formControlName="district" type="text" class="form-control" placeholder="Tamarineira">
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row">
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Rua</label>
+                <input id="address-street" formControlName="street" type="text" class="form-control" placeholder="Av. Caxangá">
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>Número</label>
+                <input id="address-number" formControlName="number" type="text" class="form-control" placeholder="000">
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>Complemento<small> &mdash; Opcional</small></label>
+                <input formControlName="complement" type="text" class="form-control" placeholder="Aptº 0000">
+              </div>
+            </div>
+
+          </div>
+
+          <button [disabled]="creatingPatient" type="submit" class="btn btn-success btn-sm pull-right">{{creatingPatient ?
+            'Criando' : 'Criar'}} <i *ngIf="creatingPatient" class="fa fa-spinner fa-spin"></i></button>
+
+        </form>
+
+      </div>
+
+
+
+    </div>
+
+
+  </div>

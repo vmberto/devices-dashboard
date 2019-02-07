@@ -1,0 +1,68 @@
+<div class="panel" style="padding: 0;">
+  <div class="panel-head">
+    <h4 class="panel-title">
+      Sessões
+
+    </h4>
+    <div class="sessions-action">
+      <button (click)="changeModalState('open')" class="btn btn-primary btn-sm">Registrar</button>
+      <button (click)="downloadPatientEvolution(4)" class="btn btn-success btn-sm ml-2" [disabled]="sessions.length < 1"
+        [title]="sessions.length < 1 ? 'É necessário que o paciente tenha pelo menos uma sessão' : 'Baixar a evolução do paciente'">
+        <i class="fa" [ngClass]="{'fa-download': !downloadingEvolution, 'fa-spinner': downloadingEvolution, 'fa-spin': downloadingEvolution}"></i>
+        Evolução
+      </button>
+    </div>
+  </div>
+  <div class="panel-body" style="padding: 25px;">
+
+    <div class="expansive-panel pointer" (click)="session.opened = !session.opened" *ngFor="let session of sessions; let i = index"
+      [ngClass]="
+      {
+        'full-radius': sessions.length === 1,
+        'no-top-radius': sessions[sessions.length - 1] === session && sessions.length > 1,
+        'no-bottom-radius': sessions[0] === session && sessions.length > 1,
+        'no-radius': sessions[sessions.length - 1] !== session && sessions[0] !== session && sessions.length > 1,
+        'selected-panel': session.opened,
+        'expansive-panel-good': session.humour_id === 4,
+        'expansive-panel-medium': session.humour_id === 5,
+        'expansive-panel-bad': session.humour_id === 1 || session.humour_id === 2 || session.humour_id === 3
+      }">
+      <div class="row">
+        <div class="col-sm-2">
+          <h4 id="humour">{{session.Humour.title}}</h4>
+        </div>
+
+
+
+        <div class="col-sm-5">
+          <h4 id="first-session" style="text-align: center">{{(session.attendance_at | date:'EEEE')}}</h4>
+        </div>
+
+        <div class="col-sm-5">
+          <h4 id="attendance_at">{{ (session.attendance_at | date:'dd/MM/yyyy') + ' ' + (session.attendance_at |
+            date:'HH:mm') }}</h4>
+        </div>
+
+      </div>
+
+      <div [@collapse] *ngIf="session.opened" class="expanded">
+
+        <p>
+          {{session.description}}
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div *ngIf="sessions.length === 0" style="text-align: center">
+      <span>Não houve sessões com este paciente</span>
+    </div>
+
+  </div>
+
+</div>
+
+
+<app-create-session *ngIf="modalState === 'open'" (closeModal)="changeModalState($event)"></app-create-session>

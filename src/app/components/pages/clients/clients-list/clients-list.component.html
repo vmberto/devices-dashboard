@@ -1,0 +1,116 @@
+
+
+<div class="panel" style="padding: 0;">
+
+  <div class="panel-head" style="background: none; padding: 20px 20px 0 20px;">
+
+    <div class="table-actions">
+
+      <button routerLink="create" class="btn btn-primary btn-sm">
+        <i class="fa fa-user-plus"></i>
+        Cadastrar Cliente
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="panel-body" style="padding: 0 20px 15px 20px;">
+
+    <div class="table-wrapper" style="margin: 20px 0 0 0">
+
+
+      <div class="tableStyles">
+
+
+        <table class="table align-items-center table-flush">
+          <thead class="thead-light">
+            <th *ngFor="let tableHead of tableHeaders">
+
+              <a *ngIf="tableHead.sortable; else noSort" class="pointer" (click)="changeSort(tableHead)">
+                {{tableHead.title}}
+                <i class="fa" [ngClass]="{'fa-caret-up': tableHead.sorted === 'asc', 'fa-caret-down': tableHead.sorted === 'desc'}"></i>
+              </a>
+              <ng-template #noSort>
+                {{tableHead.title}}
+              </ng-template>
+
+            </th>
+            <th></th>
+          </thead>
+          <tbody *ngIf="tableData">
+
+            <tr *ngFor="let client of tableData" class="line">
+              <td>
+                {{ client.name }}
+              </td>
+              <td>
+                {{client.phone}}
+              </td>
+              <td>
+                {{client.environments.length }}
+              </td>
+              <td>
+                {{client.createdAt | date:'dd/MM/yyyy'}}
+              </td>
+              <td>
+                <button class="btn btn-sm btn-success"  (click)="show(client.id)">
+                  <i class="fa fa-search"></i>
+                </button>
+              </td>
+            </tr>
+
+          </tbody>
+
+          <tbody *ngIf="!tableData || tableData.length <= 0">
+            <tr>
+              <td colspan="4" style="text-align: center">NENHUM CLIENTE CADASTRADO</td>
+            </tr>
+          </tbody>
+          
+        </table>
+
+
+      </div>
+
+      <div class="row tablePagination">
+
+        <div class="input-group col-xl-2 col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="list-limit">Limite</label>
+          </div>
+          <select id="list-limit" [(ngModel)]="selectedSize" (change)="limitChange(selectedSize)" class="custom-select">
+            <option *ngFor="let pageSize of pageSizeOptions" [value]="pageSize">{{pageSize}}</option>
+          </select>
+        </div>
+
+        <div class="btn-group col-xl-4 col-lg-8 col-md-8 col-sm-12 col-12" role="group">
+
+          <button type="button" [disabled]="!tableMetaData || tableMetaData?.paginationConfig.current_page === 1" class="btn btn-outline"
+            (click)="paginationChange(tableMetaData?.paginationConfig.current_page - 1)">
+            <i class="fa fa-angle-left"></i>
+          </button>
+
+          <button type="button" class="btn btn-primary">{{ tableMetaData?.paginationConfig.current_page || 1}}</button>
+
+          <button type="button" [disabled]="tableMetaData?.paginationConfig.current_page === tableMetaData?.paginationConfig.total_pages"
+            class="btn btn-outline" (click)="paginationChange(tableMetaData?.paginationConfig.current_page + 1)">
+            <i class="fa fa-angle-right"></i>
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+</div>
+
+<!-- <app-patients-list-filter *ngIf="tableMetaData && tableMetaData.filterConfig" [filterConfig]="tableMetaData.filterConfig"
+  [hidden]="!(filtersFormOpen === 'open')" (closeModal)="changeFiltersModalState($event)" (sendFilters)="submitFilters($event)">
+</app-patients-list-filter> -->
