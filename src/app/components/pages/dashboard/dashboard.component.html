@@ -20,15 +20,16 @@
             <div class="card-head">
                 <div class="row">
                     <div class="col-md-6">
-                        <h5 class="card-title data-name">Total de Antendimentos</h5>
+                        <h5 class="card-title data-name">Últimas Atualizações</h5>
                     </div>
                     <div class="col-md-6">
                         <nav id="menu">
                             <ul>
-                                <li><input type="date" [max]="endDate | date:'yyyy-MM-dd'" [ngModel]="startDate | date:'yyyy-MM-dd'"
-                                        (ngModelChange)="startDate = $event" (change)="recalculateSessions()"></li>
-                                <li><input type="date" [min]="startDate | date:'yyyy-MM-dd'" [ngModel]="endDate | date:'yyyy-MM-dd'"
-                                        (ngModelChange)="endDate = $event" (change)="recalculateSessions()"></li>
+                                <li>
+                                    <select type="date" class="form-control" [ngModel]="startDate | date:'yyyy-MM-dd'"
+                                        (ngModelChange)="startDate = $event" (change)="recalculateSessions()">
+                                    </select>
+                                </li>
                             </ul>
                         </nav>
                     </div>
@@ -45,7 +46,7 @@
                     </div>
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                         <h5 class="data-name">Pacientes Atendidos </h5>
-                        <p>{{ !attendedPatients || attendedPatients === 0 ? 0 : attendedPatients  }}</p>
+                        <p>{{ !attendedPatients || attendedPatients === 0 ? 0 : attendedPatients }}</p>
                     </div>
                 </div>
             </div>
