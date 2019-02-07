@@ -16,7 +16,7 @@ export const listObjShow = trigger('listObjShow', [
         query(':enter', style({ opacity: 0 }), { optional: true }),
         query(':enter', stagger('150ms', [
             animate('600ms', keyframes([
-                style({ opacity: 0, transform: 'translateX(-300px)' }),
+                style({ opacity: 0, transform: 'translateX(300px)' }),
                 style({ opacity: 1, transform: 'translateX(0)' }),
 
             ]))
@@ -26,8 +26,8 @@ export const listObjShow = trigger('listObjShow', [
         query(':leave', stagger('150ms', [
             animate('600ms', keyframes([
                 style({ opacity: 1, transform: 'translateX(0)', offset: 0 }),
-                style({ opacity: .5, transform: 'translateX(-100px)', offset: 0.3 }),
-                style({ opacity: 0, transform: 'translateX(-200px)', offset: 1 }),
+                style({ opacity: .5, transform: 'translateX(100px)', offset: 0.3 }),
+                style({ opacity: 0, transform: 'translateX(300px)', offset: 1 }),
 
             ]))
         ]), { optional: true }),

@@ -1,4 +1,4 @@
-import { ClientsService, ShareDataService, SessionsService } from 'src/app/services';
+import { ClientsService, ShareDataService } from 'src/app/services';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { showup } from 'src/app/utils/animations/animations';

@@ -1,0 +1,34 @@
+<div class="panel"  style="overflow-x:hidden">
+
+  <div class="panel-head">
+
+    <h4 class="panel-title">
+      Últimas Mensagens
+    </h4>
+
+  </div>
+
+
+  <div class="panel-body">
+
+
+    <div id="container" [@listObjShow]="messages.length">
+
+      <div class="message" *ngFor="let i of messages">
+
+        <div class="row">
+
+          <div class="col-md-4">Dispositivo: {{ i.device }}</div>
+          <div class="col-md-4">{{ i.temperature }}&deg;</div>
+          <div class="col-md-4">{{ i.created_at | date:'dd/MM/yyyy HH:mm' }}</div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+</div>

@@ -26,13 +26,13 @@ import {
   ClientsShowComponent,
   DataCardComponent,
   ClientDataComponent,
-  ClientSessionsComponent,
   ClientsIndexComponent,
-  CreateSessionComponent
 } from './components';
 
 // Directives
 import { ModalDirective } from './directives/modal.directive';
+import { ClientMessagesComponent } from './components/pages/clients/clients-show/client-messages/client-messages.component';
+import { ClientEnvironmentsComponent } from './components/pages/clients/clients-show/client-environments/client-environments.component';
 
 registerLocaleData(localePt);
 @NgModule({
@@ -48,10 +48,10 @@ registerLocaleData(localePt);
     ClientsShowComponent,
     DataCardComponent,
     ClientDataComponent,
-    ClientSessionsComponent,
     ClientsIndexComponent,
-    CreateSessionComponent,
     ModalDirective,
+    ClientMessagesComponent,
+    ClientEnvironmentsComponent,
   ],
   imports: [
     BrowserModule,

@@ -13,5 +13,3 @@ export { ClientsListComponent } from './pages/clients/clients-list/clients-list.
 export { ClientsCreateComponent } from './pages/clients/clients-create/clients-create.component';
 export { ClientsShowComponent } from './pages/clients/clients-show/clients-show.component';
 export { ClientDataComponent } from './pages/clients/clients-show/client-data/client-data.component';
-export { ClientSessionsComponent } from './pages/clients/clients-show/client-sessions/client-sessions.component';
-export { CreateSessionComponent } from './pages/clients/clients-show/client-sessions/create-session/create-session.component';

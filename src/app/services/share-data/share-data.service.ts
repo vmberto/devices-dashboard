@@ -7,7 +7,6 @@ import { Subject } from 'rxjs';
 export class ShareDataService {
 
     public loadingScreenEvent = new Subject<any>();
-    public sessionLimitEvent = new Subject<any>();
 
     private clientData: any;
 
@@ -15,10 +14,6 @@ export class ShareDataService {
 
     public activateLoadingScreen(activate) {
       setTimeout(() => { this.loadingScreenEvent.next(activate); });
-    }
-
-    public watchSessionLimit(changed: boolean) {
-      this.sessionLimitEvent.next(changed);
     }
 
     get client() {

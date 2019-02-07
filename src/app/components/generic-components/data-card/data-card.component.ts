@@ -8,8 +8,13 @@ import { Component, OnInit, Input } from '@angular/core';
 export class DataCardComponent implements OnInit {
 
   @Input() cardTitle: string;
-  @Input() cardIcon: string;
   @Input() cardData: any;
+
+  @Input() subCardIcon: string;
+  @Input() subCardTitle: string;
+  @Input() subCardData: any;
+  
+
   @Input() routerLink: string;
 
   constructor() { }

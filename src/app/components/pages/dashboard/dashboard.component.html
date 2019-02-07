@@ -1,7 +1,15 @@
 <div class="row">
     <div class="col-xl-2 col-lg-4 col-md-6 col-sm-6 col-12">
-        <app-data-card [cardTitle]="'Total de Clientes'" [cardIcon]="'fa-users'" [cardData]="patientsCounter | async"
-            [routerLink]="'/home/patients'"></app-data-card>
+        <app-data-card 
+            [cardTitle]="'Total de Clientes'"
+            [cardData]="clientsCounter | async"
+            
+            [subCardIcon]="'fa fa-street-view'" 
+            [subCardTitle]="'ambientes'"
+            [subCardData]="environmentsCounter | async"
+
+            [routerLink]="'/home/clients'">
+        </app-data-card>
     </div>
 </div>
 <div class="row">

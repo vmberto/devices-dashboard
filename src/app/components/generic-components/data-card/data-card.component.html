@@ -11,9 +11,11 @@
             <div class="stats">
                 <div>
                     <p class="card-footer-title">
-                        <i class="text-success fa fa-check mr-2"></i>
-                        <ng2-odometer [format]="'d'" [number]="cardData"></ng2-odometer>
-                        pacientes ativos
+                        <i [class]="'text-success mr-2 ' + subCardIcon"></i>
+
+                        <ng2-odometer [format]="'d'" [number]="subCardData"></ng2-odometer>
+
+                        {{subCardTitle}}
                     </p>
                 </div>
             </div>
