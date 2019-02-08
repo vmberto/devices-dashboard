@@ -1,0 +1,13 @@
+.environment-form {
+    height: auto;
+    width: 100%;
+    padding: 0 20px;
+    background: var(--darker-color-selected);
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    overflow: hidden;
+  }
+  
+  .environment-form form {
+    padding: 15px!important;
+    height: 100%;
+  }

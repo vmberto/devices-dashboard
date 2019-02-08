@@ -1,3 +1,113 @@
-<p>
-  client-environments works!
-</p>
+<div class="panel">
+
+  <div class="panel-head" style="margin: 0;">
+
+    <h4 class="panel-title">
+      Ambientes
+    </h4>
+
+    <button (click)="createEnvironmentToggle = !createEnvironmentToggle" class="btn btn-primary btn-sm">
+      <i class="fa fa-plus"></i>
+      Cadastrar Ambiente
+    </button>
+  </div>
+
+  <div [@collapse] *ngIf="createEnvironmentToggle" class="environment-form">
+
+    <form [formGroup]="environmentForm" (submit)="submitEnvironment()">
+
+      <div class="row">
+
+        <div class="col-xl-5">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <label class="input-group-text">Nome</label>
+            </div>
+            <input id="name-input" type="text" class="form-control" placeholder="Sala" formControlName="title">
+          </div>
+        </div>
+
+        <div class="col-xl-5">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <label class="input-group-text">Atualização</label>
+            </div>
+            <input type="text" class="form-control" placeholder="10" formControlName="update_time">
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <button class="btn btn-block full-width-mobile btn-success pull-right" type="submit">
+            <i class="fa fa-check"
+              [ngClass]="{'fa-check': !creatingEnvironment, 'fa-spin': creatingEnvironment, 'fa-spinner': creatingEnvironment}"></i>
+          </button>
+        </div>
+
+      </div>
+
+    </form>
+
+  </div>
+
+  <div class="panel-body">
+
+    <div class="table-wrapper" style="margin: 20px 0 0 0">
+
+
+      <div class="tableStyles">
+
+
+        <table class="table align-items-center table-flush">
+
+          <tbody *ngIf="environments">
+
+            <tr *ngFor="let environment of environments" class="line">
+              <td>
+                {{ environment.title }}
+              </td>
+              <td>
+                Dispositivo {{ environment.deviceId }}
+              </td>
+              <td>
+                <span style="color: red" [ngClass]="{}">Inativo</span>
+              </td>
+            </tr>
+
+          </tbody>
+
+          <tbody *ngIf="!environments || environments.length <= 0">
+            <tr>
+              <td colspan="3" style="text-align: center">Nenhum ambiente cadastrado</td>
+            </tr>
+          </tbody>
+
+        </table>
+
+
+      </div>
+<!-- 
+      <div class="row tablePagination">
+
+        <div class="btn-group col-xl-4 col-lg-8 col-md-8 col-sm-12 col-12" role="group">
+
+          <button type="button" [disabled]="!tableMetaData || tableMetaData?.paginationConfig.current_page === 1"
+            class="btn btn-outline" (click)="paginationChange(tableMetaData?.paginationConfig.current_page - 1)">
+            <i class="fa fa-angle-left"></i>
+          </button>
+
+          <button type="button" class="btn btn-primary">{{ tableMetaData?.paginationConfig.current_page || 1}}</button>
+
+          <button type="button"
+            [disabled]="tableMetaData?.paginationConfig.current_page === tableMetaData?.paginationConfig.total_pages"
+            class="btn btn-outline" (click)="paginationChange(tableMetaData?.paginationConfig.current_page + 1)">
+            <i class="fa fa-angle-right"></i>
+          </button>
+
+        </div>
+
+      </div> -->
+
+    </div>
+
+  </div>
+</div>

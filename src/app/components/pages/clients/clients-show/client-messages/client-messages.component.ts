@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import io from "socket.io-client";
 import { environment } from 'src/environments/environment';
 import { listObjShow } from 'src/app/utils/animations/animations';
+import io from "socket.io-client";
+import { ShareDataService } from 'src/app/services';
 
 @Component({
   selector: 'app-client-messages',
@@ -13,35 +14,25 @@ export class ClientMessagesComponent implements OnInit {
 
   public messages: any = [];
 
+  public environmentsId: number[];
+
   private url = environment.API_URL;
   private socket;
 
 
-  constructor() { }
+  constructor(private shareDataService: ShareDataService) {
+    this.environmentsId = this.shareDataService.client.environments.map(environment => environment.id);
+   }
 
   ngOnInit() {
 
     this.socket = io.connect(this.url);
 
+    this.socket.on('update-dashboard', (message: any) => {
 
-    this.socket.on('message-received', (msg: any) => {
-      
-      if (this.messages.length === 5) {
-        this.messages.pop();
-        setTimeout(() => {
-          this.messages.unshift(msg);
-        }, 100);
-      } else {
-        this.messages.unshift(msg);
-      }
+        if (this.environmentsId.indexOf(message.deviceId) !== -1) this.messages.unshift(message);
 
     });
-    
-
-    //   this.socket.on('message-received', (msg: any) => {
-    //     this.messages.unshift(msg);
-    // });
-
 
   }
 

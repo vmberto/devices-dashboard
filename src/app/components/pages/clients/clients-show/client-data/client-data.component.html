@@ -23,38 +23,38 @@
 
       <div class="col-md-4">
         <label class="data-name">CEP</label>
-        <p>{{ client.address.zipCode }}</p>
+        <p>{{ client.address?.zipCode }}</p>
       </div>
 
 
       <div class="col-md-4">
 
         <label class="data-name">Cidade</label>
-        <p>{{ client.address.city }}</p>
+        <p>{{ client.address?.city }}</p>
 
       </div>
 
       <div class="col-md-4">
 
         <label class="data-name">Bairro</label>
-        <p>{{ client.address.district }}</p>
+        <p>{{ client.address?.district }}</p>
 
       </div>
 
       <div class="col-md-4">
         <label class="data-name">Rua</label>
-        <p>{{ client.address.street }}</p>
+        <p>{{ client.address?.street }}</p>
       </div>
 
       <div class="col-md-4">
         <label class="data-name">Número</label>
-        <p>{{ client.address.number }}</p>
+        <p>{{ client.address?.number }}</p>
       </div>
 
-      <div [hidden]="!client.address.complement" class="col-md-4">
+      <div [hidden]="!client.address?.complement" class="col-md-4">
 
         <label class="data-name">Complemento</label>
-        <p>{{ client.address.complement }}</p>
+        <p>{{ client.address?.complement }}</p>
 
       </div>
 

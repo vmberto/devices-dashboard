@@ -19,7 +19,6 @@ export class ClientDataComponent implements OnInit {
 
   ngOnInit() {
 
-
     this.client = this.shareDataService.client;
 
   }
