@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { listObjShow } from 'src/app/utils/animations/animations';
-import io from "socket.io-client";
 import { ShareDataService } from 'src/app/services';
 import { sortByKeyDesc } from 'src/app/utils/app.utils';
+import { WebSocketService } from 'src/app/services/webksocket/websocket.service';
 
 @Component({
   selector: 'app-client-messages',
@@ -17,13 +17,13 @@ export class ClientMessagesComponent implements OnInit {
 
   public environmentsId: number[];
 
-  private url = environment.API_URL;
-  private socket;
 
-
-  constructor(private shareDataService: ShareDataService) {
+  constructor(
+    private shareDataService: ShareDataService,
+    private webSocket: WebSocketService
+  ) {
     this.environmentsId = this.shareDataService.client.environments.map(environment => environment.id);
-   }
+  }
 
   ngOnInit() {
 
@@ -33,15 +33,17 @@ export class ClientMessagesComponent implements OnInit {
 
     sortByKeyDesc(this.messages, 'createdAt');
 
-    console.log(this.messages);
-    
-    this.socket = io.connect(this.url);
 
-    this.socket.on('update-dashboard', (message: any) => {
+    this.webSocket.messageEvent.subscribe(message => {
 
-        if (this.environmentsId.indexOf(message.deviceId) !== -1) this.messages.unshift(message);
+      this.environmentsId = this.shareDataService.client.environments.map(environment => environment.id);
+
+      if (this.environmentsId.indexOf(message.deviceId) !== -1) this.messages.unshift(message);
 
     });
+
+
+
 
   }
 

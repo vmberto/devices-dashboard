@@ -69,8 +69,8 @@
                 Dispositivo {{ environment.deviceId }}
               </td>
               <td>
-                <span [ngClass]="{'text-danger': environment.status === 'Inativo', 'text-success': environment.status === 'Ativo'}">
-                  {{ environment.status }}
+                <span [ngClass]="{'text-danger': environment.status === 0, 'text-success': environment.status > 0}">
+                  Status
                 </span>
               </td>
             </tr>

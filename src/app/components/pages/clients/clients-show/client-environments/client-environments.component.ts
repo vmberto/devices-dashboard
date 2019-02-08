@@ -4,11 +4,7 @@ import { collapse } from 'src/app/utils/animations/animations';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormValidatorErrors } from 'src/app/utils/validators/errors.validators';
 import { ShareDataService } from 'src/app/services';
-import { environment } from 'src/environments/environment';
-import io from "socket.io-client";
-
-
-
+import { WebSocketService } from 'src/app/services/webksocket/websocket.service';
 
 @Component({
   selector: 'app-client-environments',
@@ -17,10 +13,6 @@ import io from "socket.io-client";
   animations: [collapse]
 })
 export class ClientEnvironmentsComponent implements OnInit {
-
-  private socket;
-  private url = environment.API_URL;
-
 
   public clientId: number;
 
@@ -35,29 +27,28 @@ export class ClientEnvironmentsComponent implements OnInit {
     private shareDataService: ShareDataService,
     private environmentsService: EnvironmentsService,
     private fb: FormBuilder,
-    private FormValidationErrors: FormValidatorErrors) { 
+    private webSocket: WebSocketService,
+    private FormValidationErrors: FormValidatorErrors) {
 
-      this.clientId = this.shareDataService.client.id;
-      this.environments = this.shareDataService.client.environments;
+    this.clientId = this.shareDataService.client.id;
+    this.environments = this.shareDataService.client.environments;
 
-      this.environments.forEach(environment => environment.status = 'Inativo')
-  
-    }
+    this.environments.forEach(environment => environment.status = 0)
+
+  }
 
   ngOnInit() {
 
-    
-    this.socket = io.connect(this.url);
+    this.webSocket.signalEvent.subscribe(signal => {
+      
+      const environmentFound = this.environments.find((environment) => {
 
-    this.socket.on('update-dashboard', (message: any) => {
+        return environment.id === signal.deviceId;
 
-        const environmentFound = this.environments.find((environment) => {
+      });
 
-          return environment.id === message.deviceId
-
-        });
-
-        if (environmentFound) environmentFound.status = 'Ativo';
+      if (environmentFound && signal.status) environmentFound.status += 1;
+      else if (environmentFound && !signal.status) environmentFound.status === 0 ? environmentFound.status = 0 : environmentFound.status -= 1;
 
     });
 
@@ -79,13 +70,13 @@ export class ClientEnvironmentsComponent implements OnInit {
 
       this.creatingEnvironment = true;
 
-
       const formControls = this.environmentForm.controls;
 
       const environmentData = {
         title: formControls.title.value,
         clientId: this.clientId
       }
+
 
       this.environmentsService.post(environmentData)
         .subscribe(
@@ -94,6 +85,9 @@ export class ClientEnvironmentsComponent implements OnInit {
             this.environmentForm.reset();
             this.creatingEnvironment = false;
             this.createEnvironmentToggle = false;
+
+            this.webSocket.environmentEmitter.next(res.new_environment);
+
 
           },
           err => {
