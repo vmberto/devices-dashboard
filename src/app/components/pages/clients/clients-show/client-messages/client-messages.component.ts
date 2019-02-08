@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 import { listObjShow } from 'src/app/utils/animations/animations';
 import io from "socket.io-client";
 import { ShareDataService } from 'src/app/services';
+import { sortByKeyDesc } from 'src/app/utils/app.utils';
 
 @Component({
   selector: 'app-client-messages',
@@ -26,6 +27,14 @@ export class ClientMessagesComponent implements OnInit {
 
   ngOnInit() {
 
+    this.shareDataService.client.environments.forEach(environment => {
+      this.messages = this.messages.concat(environment.device.messages);
+    });
+
+    sortByKeyDesc(this.messages, 'createdAt');
+
+    console.log(this.messages);
+    
     this.socket = io.connect(this.url);
 
     this.socket.on('update-dashboard', (message: any) => {

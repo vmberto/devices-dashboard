@@ -69,7 +69,9 @@
                 Dispositivo {{ environment.deviceId }}
               </td>
               <td>
-                <span style="color: red" [ngClass]="{}">Inativo</span>
+                <span [ngClass]="{'text-danger': environment.status === 'Inativo', 'text-success': environment.status === 'Ativo'}">
+                  {{ environment.status }}
+                </span>
               </td>
             </tr>
 

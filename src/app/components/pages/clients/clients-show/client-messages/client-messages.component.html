@@ -14,13 +14,13 @@
 
     <div id="container" [@listObjShow]="messages.length">
 
-      <div class="message" *ngFor="let device of messages; let index = index" [hidden]="index > 5">
+      <div class="message" *ngFor="let device of messages; let index = index">
 
         <div class="row">
 
           <div class="col-md-4">Dispositivo {{ device.deviceId }}</div>
           <div class="col-md-4">{{ device.temperature }}&deg;</div>
-          <div class="col-md-4">{{ device.created_at | date:'dd/MM/yyyy HH:mm:ss' }}</div>
+          <div class="col-md-4">{{ device.createdAt | date:'dd/MM/yyyy HH:mm:ss' }}</div>
 
         </div>
 

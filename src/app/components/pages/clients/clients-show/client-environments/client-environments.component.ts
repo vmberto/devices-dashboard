@@ -4,6 +4,10 @@ import { collapse } from 'src/app/utils/animations/animations';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormValidatorErrors } from 'src/app/utils/validators/errors.validators';
 import { ShareDataService } from 'src/app/services';
+import { environment } from 'src/environments/environment';
+import io from "socket.io-client";
+
+
 
 
 @Component({
@@ -13,6 +17,10 @@ import { ShareDataService } from 'src/app/services';
   animations: [collapse]
 })
 export class ClientEnvironmentsComponent implements OnInit {
+
+  private socket;
+  private url = environment.API_URL;
+
 
   public clientId: number;
 
@@ -27,18 +35,38 @@ export class ClientEnvironmentsComponent implements OnInit {
     private shareDataService: ShareDataService,
     private environmentsService: EnvironmentsService,
     private fb: FormBuilder,
-    private FormValidationErrors: FormValidatorErrors) { }
+    private FormValidationErrors: FormValidatorErrors) { 
+
+      this.clientId = this.shareDataService.client.id;
+      this.environments = this.shareDataService.client.environments;
+
+      this.environments.forEach(environment => environment.status = 'Inativo')
+  
+    }
 
   ngOnInit() {
 
-    this.clientId = this.shareDataService.client.id;
+    
+    this.socket = io.connect(this.url);
+
+    this.socket.on('update-dashboard', (message: any) => {
+
+        const environmentFound = this.environments.find((environment) => {
+
+          return environment.id === message.deviceId
+
+        });
+
+        if (environmentFound) environmentFound.status = 'Ativo';
+
+    });
+
 
     this.environmentForm = this.fb.group({
       title: ['', [Validators.required]],
       update_time: ['', [Validators.required]]
     });
 
-    this.environments = this.shareDataService.client.environments;
 
 
   }
