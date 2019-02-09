@@ -1,20 +1,4 @@
-
-
 <div class="panel" style="padding: 0;">
-
-  <div class="panel-head" style="background: none; padding: 20px 20px 0 20px;">
-
-    <div class="table-actions">
-
-      <button routerLink="create" class="btn btn-primary btn-sm">
-        <i class="fa fa-user-plus"></i>
-        Cadastrar Cliente
-      </button>
-
-    </div>
-
-  </div>
-
 
   <div class="panel-body" style="padding: 0 20px 15px 20px;">
 
@@ -30,7 +14,8 @@
 
               <a *ngIf="tableHead.sortable; else noSort" class="pointer" (click)="changeSort(tableHead)">
                 {{tableHead.title}}
-                <i class="fa" [ngClass]="{'fa-caret-up': tableHead.sorted === 'asc', 'fa-caret-down': tableHead.sorted === 'desc'}"></i>
+                <i class="fa"
+                  [ngClass]="{'fa-caret-up': tableHead.sorted === 'asc', 'fa-caret-down': tableHead.sorted === 'desc'}"></i>
               </a>
               <ng-template #noSort>
                 {{tableHead.title}}
@@ -41,34 +26,41 @@
           </thead>
           <tbody *ngIf="tableData">
 
-            <tr *ngFor="let client of tableData" class="line">
+            <tr *ngFor="let device of tableData" class="line">
               <td>
-                {{ client.name }}
+                {{ device.id }}
               </td>
               <td>
-                {{client.phone}}
+                <button class="btn btn-info btn-sm"
+                  routerLink="../../clients/show/{{device.environment.clientId}}">{{ device.environment.clientId }}</button>
               </td>
               <td>
-                {{client.environments.length }}
+                {{device.environment.title }}
               </td>
               <td>
-                {{client.createdAt | date:'dd/MM/yyyy'}}
+                {{ device.createdAt | date:'dd/MM/yyyy'}}
               </td>
               <td>
-                <button class="btn btn-sm btn-success"  (click)="show(client.id)">
+                <button 
+                [disabled]="device.messages?.length <= 0" 
+                class="btn btn-sm btn-success"
+                (click)="device.show_messages = !device.show_messages"
+                [title]="device.messages?.length <= 0 ? 'Nenhuma mensagem registrada nesse dispositivo' : 'Abrir histórico de mensagens'">
                   <i class="fa fa-search"></i>
                 </button>
               </td>
+
+              <app-devices-messages *ngIf="device.show_messages" [deviceId]="device.id" (closeModal)="device.show_messages = false"></app-devices-messages>
             </tr>
 
           </tbody>
 
           <tbody *ngIf="!tableData || tableData.length <= 0">
             <tr>
-              <td colspan="5" style="text-align: center">NENHUM CLIENTE CADASTRADO</td>
+              <td colspan="5" style="text-align: center">NENHUM DISPOSITIVO CADASTRADO</td>
             </tr>
           </tbody>
-          
+
         </table>
 
 
@@ -87,14 +79,15 @@
 
         <div class="btn-group col-xl-4 col-lg-8 col-md-8 col-sm-12 col-12" role="group">
 
-          <button type="button" [disabled]="!tableMetaData || tableMetaData?.paginationConfig.current_page === 1" class="btn btn-outline"
-            (click)="paginationChange(tableMetaData?.paginationConfig.current_page - 1)">
+          <button type="button" [disabled]="!tableMetaData || tableMetaData?.paginationConfig.current_page === 1"
+            class="btn btn-outline" (click)="paginationChange(tableMetaData?.paginationConfig.current_page - 1)">
             <i class="fa fa-angle-left"></i>
           </button>
 
           <button type="button" class="btn btn-primary">{{ tableMetaData?.paginationConfig.current_page || 1}}</button>
 
-          <button type="button" [disabled]="tableMetaData?.paginationConfig.current_page === tableMetaData?.paginationConfig.total_pages"
+          <button type="button"
+            [disabled]="tableMetaData?.paginationConfig.current_page === tableMetaData?.paginationConfig.total_pages"
             class="btn btn-outline" (click)="paginationChange(tableMetaData?.paginationConfig.current_page + 1)">
             <i class="fa fa-angle-right"></i>
           </button>
@@ -110,7 +103,3 @@
 
 
 </div>
-
-<!-- <app-patients-list-filter *ngIf="tableMetaData && tableMetaData.filterConfig" [filterConfig]="tableMetaData.filterConfig"
-  [hidden]="!(filtersFormOpen === 'open')" (closeModal)="changeFiltersModalState($event)" (sendFilters)="submitFilters($event)">
-</app-patients-list-filter> -->

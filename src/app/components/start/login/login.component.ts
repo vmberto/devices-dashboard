@@ -23,6 +23,8 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private formValidatorErrors: FormValidatorErrors,
     private toastService: ToastService) {
+    this.route.config[0].children[0].redirectTo = 'login'
+
 
     if (this.authService.isLoggedIn()) {
       this.route.navigate(['home']);

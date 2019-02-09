@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormValidatorErrors } from 'src/app/utils/validators/errors.validators';
 import { ShareDataService } from 'src/app/services';
 import { WebSocketService } from 'src/app/services/webksocket/websocket.service';
+import { updateTimeValidator } from 'src/app/utils/validators/validators';
 
 @Component({
   selector: 'app-client-environments',
@@ -22,6 +23,7 @@ export class ClientEnvironmentsComponent implements OnInit {
   public environmentForm: FormGroup;
 
   public environments: any[];
+  
 
   constructor(
     private shareDataService: ShareDataService,
@@ -41,7 +43,7 @@ export class ClientEnvironmentsComponent implements OnInit {
 
     this.environmentForm = this.fb.group({
       title: ['', [Validators.required]],
-      update_time: ['', [Validators.required]]
+      update_time: ['', [Validators.required], [updateTimeValidator]]
     });
 
   }
@@ -55,10 +57,14 @@ export class ClientEnvironmentsComponent implements OnInit {
       this.creatingEnvironment = true;
 
       const formControls = this.environmentForm.controls;
+      let updateTime = formControls.update_time.value;
+      if (formControls.update_time.value > 30) updateTime = 30;
+      else if (formControls.update_time.value < 5) updateTime = 5;
 
       const environmentData = {
         title: formControls.title.value,
-        clientId: this.clientId
+        clientId: this.clientId,
+        updateTime: updateTime * 1000
       }
 
 

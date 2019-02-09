@@ -1,0 +1,28 @@
+<div appModal>
+
+  <div class="details-modal">
+
+    <div class="modal-head">
+      <h4 class="modal-title">
+        Histórico de Mensagem
+        <button (click)="close()" class="close-btn btn btn-primary btn-sm"><i class="fa fa-times"></i></button>
+      </h4>
+    </div>
+
+    <div class="modal-body">
+
+
+      <div id="container" [@listObjShow]="messages.length">
+
+        <div *ngFor="let device of messages; let index = index">
+          <app-message-card [device]="device">
+          </app-message-card>
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>
+</div>

@@ -34,6 +34,8 @@
             </div>
             <input type="number" min="5" max="30" class="form-control" placeholder="10" formControlName="update_time">
           </div>
+          <small class="data-name" style="font-size: 8px; ">Tempo de atualização em segundos entre 5 e 30</small>
+
         </div>
 
         <div class="col-md-2">
@@ -66,10 +68,14 @@
                 {{ environment.title }}
               </td>
               <td>
-                Dispositivo {{ environment.deviceId }}
+                <strong>Dispositivo</strong> {{ environment.deviceId }}
               </td>
               <td>
-                <button (click)="deleteEnvironment(environment)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                <strong>Atualização</strong> {{ environment.device.updateTime / 1000 }} s
+              </td>
+              <td>
+                <button (click)="deleteEnvironment(environment)" class="btn btn-sm btn-danger"><i
+                    class="fa fa-trash"></i></button>
               </td>
             </tr>
 

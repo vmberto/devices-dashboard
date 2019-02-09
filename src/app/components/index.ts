@@ -23,3 +23,7 @@ export { ClientsShowComponent } from './pages/clients/clients-show/clients-show.
 export { ClientDataComponent } from './pages/clients/clients-show/client-data/client-data.component';
 export { ClientMessagesComponent } from './pages/clients/clients-show/client-messages/client-messages.component';
 export { ClientEnvironmentsComponent } from './pages/clients/clients-show/client-environments/client-environments.component';
+
+export { DevicesIndexComponent } from './pages/devices/devices-index.component';
+export { DevicesListComponent } from './pages/devices/devices-list/devices-list.component';
+export { DevicesMessagesComponent } from './pages/devices/devices-messages/devices-messages.component';

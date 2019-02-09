@@ -12,34 +12,13 @@
         </app-data-card>
     </div>
 </div>
-<div class="row">
-    <div class="col-xl-6 col-lg-8 col-md-12 col-sm-12 col-12">
-        <div class="card">
-            <div class="card-head">
-                <h5 class="card-title data-name">Relação Pacientes x Planos de Saúde</h5>
-            </div>
-            <div class="card-body">
-                <canvas id="patientsHealthInsuranceChart"></canvas>
-            </div>
-        </div>
-    </div>
+<!-- <div class="row">
     <div class="col-xl-6 col-lg-8 col-md-12 col-sm-12 col-12">
         <div class="card">
             <div class="card-head">
                 <div class="row">
-                    <div class="col-md-6">
-                        <h5 class="card-title data-name">Últimas Atualizações</h5>
-                    </div>
-                    <div class="col-md-6">
-                        <nav id="menu">
-                            <ul>
-                                <li>
-                                    <select type="date" class="form-control" [ngModel]="startDate | date:'yyyy-MM-dd'"
-                                        (ngModelChange)="startDate = $event" (change)="recalculateSessions()">
-                                    </select>
-                                </li>
-                            </ul>
-                        </nav>
+                    <div class="col-md-12">
+                        <h5 class="card-title data-name">Últimas Atualizações de Temperatura</h5>
                     </div>
                 </div>
             </div>
@@ -49,15 +28,12 @@
             <div class="card-footer">
                 <div class="row">
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                        <h5 class="data-name">Total de Horas </h5>
-                        <p>{{ totalHoursWorked || ' -- ' }}</p>
-                    </div>
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                        <h5 class="data-name">Pacientes Atendidos </h5>
-                        <p>{{ !attendedPatients || attendedPatients === 0 ? 0 : attendedPatients }}</p>
+                        <h5 class="data-name">Média de Temperatura </h5>
+                        <p>{{ lastUpdateTemperatureAverage || ' -- ' }}&deg;</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+</div> -->

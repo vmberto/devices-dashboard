@@ -7,6 +7,8 @@ import Chart from 'chart.js';
 
 import * as moment from 'moment';
 import { EnvironmentsService } from 'src/app/services/entities/enviroments.service';
+import { WebSocketService } from 'src/app/services/webksocket/websocket.service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -17,8 +19,6 @@ import { EnvironmentsService } from 'src/app/services/entities/enviroments.servi
 export class DashboardComponent implements OnInit {
 
 
-
-
     // Counters
     public clientsCounter: Observable<number>;
     public environmentsCounter: Observable<number>;
@@ -26,10 +26,14 @@ export class DashboardComponent implements OnInit {
 
     // Chart total sessions last week
     public lastUpdateChart: Chart;
+    public lastUpdateLabels: string[];
+    public lastUpdateData: number[];
+    public lastUpdateTemperatureAverage: number;
 
     constructor(
         private clientsService: ClientsService,
-        private environmentsService: EnvironmentsService
+        private environmentsService: EnvironmentsService,
+        private webSocket: WebSocketService
     ) { }
 
 
@@ -42,22 +46,46 @@ export class DashboardComponent implements OnInit {
         this.environmentsCounter = this.environmentsService.get({ url: 'counter' }).pipe(map(res => res.data));
 
 
-        this.lastUpdateChartBuilder();
-        
+
+        // this.environmentsService.get().subscribe(res => {
+
+        //     this.lastUpdateLabels = res.data.map(environment => environment.title);
+        //     this.lastUpdateData = res.data.map(environment => {
+        //         if (environment.device.messages[0]) return environment.device.messages[0].temperature;
+        //     });
+
+        //     let validData = 0;
+        //     let invalidData = 0;
+        //     this.lastUpdateData.forEach((temperature) => {
+        //         if (temperature) validData += temperature;
+        //         else invalidData += 1;
+        //     });
+            
+        //     this.lastUpdateTemperatureAverage = Math.ceil(validData / (this.lastUpdateData.length - invalidData));
+
+        //     this.lastUpdateChartBuilder();
+
+        // });
+
+        // this.webSocket.messageEvent.subscribe(() => {
+        //     window.location.reload();
+        // });
+
+
+
     }
 
     private lastUpdateChartBuilder() {
 
 
-        this.environmentsService.get( { query: { clientId: 2 } } ).subscribe(res => { console.log(res) })
 
         if (this.lastUpdateChart) this.lastUpdateChart.destroy();
         this.lastUpdateChart = new Chart('lastWeekSessionsChart', {
             type: 'bar',
             data: {
-                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                labels: this.lastUpdateLabels,
                 datasets: [{
-                    data: [12, 19, 3, 5, 2, 3],
+                    data: this.lastUpdateData,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',

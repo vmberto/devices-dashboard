@@ -37,7 +37,6 @@ export class AuthService {
     eraseCookie('auth_token');
 
     const objToken: any = JSON.parse(token);
-    console.log(objToken);
     
     const expires: number = (typeof objToken === 'object') ? objToken.token.expires_in : 21600;
 

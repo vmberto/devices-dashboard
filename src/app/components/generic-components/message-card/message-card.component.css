@@ -1,0 +1,20 @@
+.message {
+    padding: 15px 30px;
+    background: var(--font-color);
+    border-radius: 15px;
+    margin-bottom: 5px;
+    border-left: 7px solid var(--secondary-color);
+
+    font-weight: 400!important;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  
+}
+
+.message-device {
+    text-align: left;
+}
+
+.message-timestamp {
+    text-align: right;
+}
