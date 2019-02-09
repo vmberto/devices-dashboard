@@ -48,13 +48,15 @@ export class FormValidatorErrors {
     private fieldTranslate(field): string {
 
         switch (field) {
-            case 'name': return `nome`;
-            case 'street': return `rua`;
-            case 'number': return `número`;
-            case 'zip_code': return `CEP`;
-            case 'district': return `distrito`;
-            case 'city': return `cidade`;
-            case 'phone': return `celular`;
+            case 'name': return 'nome';
+            case 'email': return 'email';
+            case 'password': return 'senha';
+            case 'street': return 'rua';
+            case 'number': return 'número';
+            case 'zip_code': return 'CEP';
+            case 'district': return 'distrito';
+            case 'city': return 'cidade';
+            case 'phone': return 'celular';
         }
     }
 

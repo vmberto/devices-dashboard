@@ -28,11 +28,10 @@ export class ClientMessagesComponent implements OnInit {
 
   ngOnInit() {
 
-    this.messagesService.get( { id: this.shareDataService.client.id } ).subscribe(
+    this.messagesService.get({ id: this.shareDataService.client.id }).subscribe(
       res => {
         this.messages = res.data;
       }
-      
     )
 
 
@@ -41,12 +40,21 @@ export class ClientMessagesComponent implements OnInit {
       this.environmentsId = this.shareDataService.client.environments.map(environment => environment.id);
 
       if (this.environmentsId.indexOf(message.deviceId) !== -1) {
-        console.log(message);
-        
         this.messages.unshift(message)
       };
 
     });
+
+    this.webSocket.deletedEnvironmentEmitter.subscribe(
+      (deletedEnvironment) => {
+
+        this.messages.forEach((message, index) => {
+          if (message.deviceId === deletedEnvironment) {
+            this.messages.splice(index, 1);
+          }
+        });
+
+      });
 
 
 

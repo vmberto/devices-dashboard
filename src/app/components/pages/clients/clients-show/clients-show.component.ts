@@ -49,13 +49,5 @@ export class ClientsShowComponent implements OnInit {
     });
   }
 
-  public updateclientData($event): void {
-
-    this.clientsService.update($event).subscribe(() => {
-      if (this.shareDataService.client) {
-        this.shareDataService.client.updated_at = new Date();
-      }
-    });
-  }
 
 }

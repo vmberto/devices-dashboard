@@ -86,11 +86,15 @@ export class ClientEnvironmentsComponent implements OnInit {
   public deleteEnvironment(environment: any): void {
 
     this.environmentsService.delete(environment.id).subscribe(
-      res => {
+      () => {
 
         this.environments.splice(this.environments.indexOf(environment), 1);
 
-        this.webSocket.deletedEnvironmentEmitter.next(res.deleted_environment);
+        this.webSocket.deletedEnvironmentEmitter.next(environment.id);
+
+        if (this.environments.length === 0) {
+          window.location.reload();
+        }
 
       });
 

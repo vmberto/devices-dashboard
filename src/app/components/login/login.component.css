@@ -1,6 +1,6 @@
 .card{
     border: none!important;
-    background-color: var(--secondary-color);
+    background-color: var(--main-color);
     margin: 100px auto;
     max-width: 500px;
     text-align: center;

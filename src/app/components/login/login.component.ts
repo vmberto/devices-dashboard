@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services';
 import { ToastService } from '../generic-components/toast';
+import { FormValidatorErrors } from 'src/app/utils/validators/errors.validators';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +22,7 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private route: Router,
     private authService: AuthService,
+    private formValidatorErrors: FormValidatorErrors,
     private toastService: ToastService) {
 
     if (this.authService.isLoggedIn()) {
@@ -43,6 +45,9 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+
+    this.formValidatorErrors.getFormValidationErrors(this.loginForm);
+
     if (this.loginForm.valid) {
       this.loadingLogin = true;
       this.buttonLogin = 'Entrando';
