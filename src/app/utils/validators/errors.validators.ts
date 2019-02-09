@@ -51,6 +51,7 @@ export class FormValidatorErrors {
             case 'name': return 'nome';
             case 'email': return 'email';
             case 'password': return 'senha';
+            case 'confirm_password': return 'confirmar senha';
             case 'street': return 'rua';
             case 'number': return 'número';
             case 'zip_code': return 'CEP';

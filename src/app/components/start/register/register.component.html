@@ -6,9 +6,9 @@
       <img src="../../../assets/img/salvus-logo.PNG" alt="">
     </div>
 
-    <form [formGroup]="registerForm" (submit)="register()">
 
-      <div class="form-group">
+    <div class="form-group">
+      <form [formGroup]="registerForm" (submit)="register()">
 
         <input class="form-control form-control-lg" type="text" placeholder="Nome" name="email" formControlName="name"
           autocomplete="off" autofocus>
@@ -19,8 +19,8 @@
         <input class="form-control form-control-lg" type="password" placeholder="Senha" name="password"
           formControlName="password" autocomplete="off">
 
-        <input class="form-control form-control-lg" type="password" placeholder="Confirmar Senha" name="confirm_password"
-          formControlName="confirm_password" autocomplete="off">
+        <input class="form-control form-control-lg" type="password" placeholder="Confirmar Senha"
+          name="confirm_password" formControlName="confirm_password" autocomplete="off">
 
 
         <button type="submit" [disabled]="loadingLogin" class="btn btn-primary btn-lg btn-block">
@@ -28,12 +28,12 @@
           <i [hidden]="!registering" class="fa fa-spinner fa-spin"></i>
         </button>
 
-        <button type="button" (click)="goToLogin()" class="btn btn-outline btn-lg btn-block">
-          Voltar
-        </button>
-      </div>
 
-    </form>
+      </form>
+      <button type="button" (click)="goToLogin()" class="btn btn-outline btn-lg btn-block">
+          Voltar
+      </button>
+    </div>
+
     <small>{{ currentYear | date:'yyyy' }} © Umberto</small>
   </div>
-</div>

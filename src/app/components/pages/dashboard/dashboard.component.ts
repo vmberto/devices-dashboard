@@ -7,6 +7,7 @@ import Chart from 'chart.js';
 
 import * as moment from 'moment';
 import { EnvironmentsService } from 'src/app/services/entities/enviroments.service';
+import { WebSocketService } from 'src/app/services/webksocket/websocket.service';
 
 
 @Component({
@@ -15,8 +16,6 @@ import { EnvironmentsService } from 'src/app/services/entities/enviroments.servi
     styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
-
 
 
     // Counters
@@ -29,7 +28,8 @@ export class DashboardComponent implements OnInit {
 
     constructor(
         private clientsService: ClientsService,
-        private environmentsService: EnvironmentsService
+        private environmentsService: EnvironmentsService,
+        private webSocket: WebSocketService
     ) { }
 
 
@@ -49,7 +49,6 @@ export class DashboardComponent implements OnInit {
     private lastUpdateChartBuilder() {
 
 
-        this.environmentsService.get( { query: { clientId: 2 } } ).subscribe(res => { console.log(res) })
 
         if (this.lastUpdateChart) this.lastUpdateChart.destroy();
         this.lastUpdateChart = new Chart('lastWeekSessionsChart', {

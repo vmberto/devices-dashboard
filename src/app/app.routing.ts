@@ -11,6 +11,8 @@ import {
   RegisterComponent,
   StartIndexComponent
 } from './components';
+import { DevicesIndexComponent } from './components/pages/devices/devices-index.component';
+import { DevicesListComponent } from './components/pages/devices/devices-list/devices-list.component';
 
 
 const routes: Routes = [
@@ -19,8 +21,8 @@ const routes: Routes = [
     path: '', component: StartIndexComponent, children:
       [
         { path: '', redirectTo: 'login', pathMatch: 'full' },
-        { path: 'login', component: LoginComponent },
         { path: 'register', component: RegisterComponent },
+        { path: 'login', component: LoginComponent },
       ]
   },
 
@@ -35,6 +37,13 @@ const routes: Routes = [
         path: 'clients', component: ClientsIndexComponent, data: { title: 'clientes' }, children: [
           { path: '', component: ClientsListComponent },
           { path: 'create', component: ClientsCreateComponent },
+          { path: 'show/:id', component: ClientsShowComponent },
+        ]
+      },
+
+      {
+        path: 'devices', component: DevicesIndexComponent, data: { title: 'dispositivos' }, children: [
+          { path: '', component: DevicesListComponent },
           { path: 'show/:id', component: ClientsShowComponent },
         ]
       },

@@ -29,7 +29,9 @@ import {
   ClientMessagesComponent,
   ClientEnvironmentsComponent,
   RegisterComponent,
-  StartIndexComponent
+  StartIndexComponent,
+  DevicesListComponent,
+  DevicesIndexComponent
 } from './components';
 
 // Directives
@@ -56,7 +58,9 @@ registerLocaleData(localePt);
     ClientMessagesComponent,
     ClientEnvironmentsComponent,
     RegisterComponent,
-    StartIndexComponent
+    StartIndexComponent,
+    DevicesListComponent,
+    DevicesIndexComponent
   ],
   imports: [
     BrowserModule,

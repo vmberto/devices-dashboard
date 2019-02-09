@@ -5,14 +5,15 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ListComponent } from 'src/app/utils/crud/list-components.utils';
 import { collapse } from 'src/app/utils/animations/animations';
+import { DevicesService } from 'src/app/services/entities/devices.service';
 
 @Component({
   selector: 'app-test',
-  templateUrl: './clients-list.component.html',
-  styleUrls: ['./clients-list.component.css'],
+  templateUrl: './devices-list.component.html',
+  styleUrls: ['./devices-list.component.css'],
   animations: [collapse]
 })
-export class ClientsListComponent extends ListComponent implements OnInit {
+export class DevicesListComponent extends ListComponent implements OnInit {
 
   public filterForm: FormGroup;
   public clearFiltersBtn: boolean;
@@ -20,26 +21,20 @@ export class ClientsListComponent extends ListComponent implements OnInit {
 
 
   public tableHeaders = [
-    { title: 'Nome', value: 'name', sortable: true },
-    { title: 'Contato', value: 'contact', sortable: false },
-    { title: 'Ambientes', value: 'environments', sortable: false },
-    { title: 'Criado', value: 'created_at', sortable: true }
+    { title: 'Dispositivo', value: 'device', sortable: false },
+    { title: 'Cliente', value: 'client', sortable: false },
+    { title: 'Ambiente', value: 'environment', sortable: false },
+    { title: 'Criado', value: 'created_at', sortable: false }
   ];
 
-  public TABS = [
-    { title: 'Ativos',   value: 1 },
-    { title: 'Inativos', value: 2 },
-    { title: 'De Alta',  value: 3 },
-  ];
-
-  constructor(private clientsService: ClientsService,
+  constructor(private devicesService: DevicesService,
     private shareData: ShareDataService,
     private router: Router,
     private fb: FormBuilder) {
     super();
 
     this.filterCriteria = new FilterCriteria();
-    this.resource = this.clientsService;
+    this.resource = this.devicesService;
     this.shareDataService = this.shareData;
   }
 
@@ -51,8 +46,6 @@ export class ClientsListComponent extends ListComponent implements OnInit {
     });
 
     this.filterCriteria.addListParams();
-    this.filterCriteria.addParam('patient_status', 1);
-    this.currentListStatus = 1;
 
     this.loadData();
   }
@@ -95,19 +88,6 @@ export class ClientsListComponent extends ListComponent implements OnInit {
     this.loadData();
   }
 
-  changeListStatus(status): void {
-    if (this.currentListStatus !== status) {
-      this.currentListStatus = status;
-      switch (status) {
-        case 1: this.filterCriteria.addParam('patient_status', 1); break;
-        case 2: this.filterCriteria.addParam('patient_status', 2); break;
-        case 3: this.filterCriteria.addParam('patient_status', 3); break;
-      }
-
-      this.loadData();
-    }
-  }
-
 
   /**
    * Direciona para a rota de detalhes do paciente
@@ -122,7 +102,7 @@ export class ClientsListComponent extends ListComponent implements OnInit {
    * @param id (number)
    */
   public delete(id: number) {
-    this.clientsService.delete(id).subscribe(
+    this.devicesService.delete(id).subscribe(
       () => {
         this.loadData();
 

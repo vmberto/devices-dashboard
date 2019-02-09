@@ -23,6 +23,8 @@ export class RegisterComponent implements OnInit {
     private authService: AuthService,
     private formValidatorErrors: FormValidatorErrors) {
 
+    this.route.config[0].children[0].redirectTo = 'register';
+
     if (this.authService.isLoggedIn()) {
       this.route.navigate(['home']);
       return;
@@ -46,6 +48,10 @@ export class RegisterComponent implements OnInit {
   }
 
   public register(): void {
+
+    console.log();
+    
+    
     this.formValidatorErrors.getFormValidationErrors(this.registerForm);
 
     if (this.registerForm.valid) {
@@ -69,10 +75,8 @@ export class RegisterComponent implements OnInit {
 
             this.registering = false;
 
-            this.route.navigate(['./login']);
           },
           () => {
-            this.route.navigate(['./register']);
             this.registering = false;
             this.buttonRegister = 'Cadastrar';
           });
