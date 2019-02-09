@@ -1,0 +1,54 @@
+.table-wrapper{
+    margin-top: 10px;
+  }
+  
+  .tableStyles{
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .table thead th {
+    border: none!important;
+    font-weight: 900!important;
+    font-size: .65rem;
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  
+  
+  .table>tbody>tr>td {
+    
+    background-color: rgba(0,0,0,.03);
+    border-color: var(--lighter-color);
+    font-weight: 300;
+  }
+  .table>tbody>tr:first-child>td { border: none; }
+  
+  .table {
+    width: 100%;
+  }
+  
+  
+  .tablePagination{
+    border-radius: 20px;
+  }
+  
+  
+  .tablePagination select,
+  .tablePagination input{
+    border-left: none!important;
+  }
+  
+  
+  .tablePagination .btn-group {
+    height: 50%;
+  }
+
+.table-actions {
+  margin-bottom: 20px;
+}
+
+.table-actions button {
+  margin: 5px 7.5px;
+}
