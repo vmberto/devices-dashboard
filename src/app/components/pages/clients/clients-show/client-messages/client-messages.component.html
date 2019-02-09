@@ -14,16 +14,9 @@
 
     <div id="container" [@listObjShow]="messages.length">
 
-      <div class="message" *ngFor="let device of messages; let index = index">
-
-        <div class="row">
-
-          <div class="col-md-4">Dispositivo {{ device.deviceId }}</div>
-          <div class="col-md-4">{{ device.temperature }}&deg;</div>
-          <div class="col-md-4">{{ device.createdAt | date:'dd/MM/yyyy HH:mm:ss' }}</div>
-
-        </div>
-
+      <div *ngFor="let device of messages; let index = index">
+        <app-message-card [device]="device">
+        </app-message-card>
       </div>
 
     </div>

@@ -12,6 +12,7 @@ export class ListComponent {
     protected resourceFunction;
     protected filterCriteria;
     protected shareDataService;
+    protected urlOptions;
 
     protected tableData: any[];
     protected tableHeaders: TableHeaders[];
@@ -41,7 +42,7 @@ export class ListComponent {
 
         this.shareDataService.activateLoadingScreen(true);
 
-        return this.resource[this.resourceFunction ? this.resourceFunction : 'get']({ query: this.filterCriteria ? this.filterCriteria.params : {} }).subscribe(
+        return this.resource[this.resourceFunction ? this.resourceFunction : 'get']({ url: this.urlOptions || '', query: this.filterCriteria ? this.filterCriteria.params : {} }).subscribe(
             (res) => {
                 if (res.data) this.tableData = res.data;
                 if (res.meta) this.tableMetaData = res.meta;

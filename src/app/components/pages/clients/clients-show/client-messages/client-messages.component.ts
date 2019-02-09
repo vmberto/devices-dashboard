@@ -28,7 +28,7 @@ export class ClientMessagesComponent implements OnInit {
 
   ngOnInit() {
 
-    this.messagesService.get({ id: this.shareDataService.client.id }).subscribe(
+    this.messagesService.get({ id: this.shareDataService.client.id, url: 'clients' }).subscribe(
       res => {
         this.messages = res.data;
       }
@@ -55,9 +55,6 @@ export class ClientMessagesComponent implements OnInit {
         });
 
       });
-
-
-
 
   }
 

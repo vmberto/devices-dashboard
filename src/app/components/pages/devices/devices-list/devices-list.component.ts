@@ -36,6 +36,8 @@ export class DevicesListComponent extends ListComponent implements OnInit {
     this.filterCriteria = new FilterCriteria();
     this.resource = this.devicesService;
     this.shareDataService = this.shareData;
+    this.urlOptions = 'paginated';
+
   }
 
   ngOnInit() {

@@ -97,6 +97,8 @@ export class EventHandler {
  * @param {any} event
  */
   private handleValidationEvent(event: any): void {
+    console.log(event);
+    
     this.toastService.show({ text: event.msg || 'Erro de Validação', type: 'warning' });
   }
 

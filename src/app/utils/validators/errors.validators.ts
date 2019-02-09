@@ -39,8 +39,8 @@ export class FormValidatorErrors {
 
         switch (error) {
             case 'required': return `O campo '${this.fieldTranslate(key)}' é obrigatório.`;
-            case 'nameValidator': return `Digite um ${this.fieldTranslate(key)} válido.`;
-            case 'emailValidator': return `Digite um ${this.fieldTranslate(key)} válido.`;
+            case 'name': return `Digite um ${this.fieldTranslate(key)} válido.`;
+            case 'email': return `Digite um ${this.fieldTranslate(key)} válido.`;
         }
 
     }
@@ -49,6 +49,7 @@ export class FormValidatorErrors {
 
         switch (field) {
             case 'name': return 'nome';
+            case 'title': return 'nome';
             case 'email': return 'email';
             case 'password': return 'senha';
             case 'confirm_password': return 'confirmar senha';
@@ -58,6 +59,7 @@ export class FormValidatorErrors {
             case 'district': return 'distrito';
             case 'city': return 'cidade';
             case 'phone': return 'celular';
+            case 'update_time': return 'taxa de atualização';
         }
     }
 

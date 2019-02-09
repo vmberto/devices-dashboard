@@ -49,9 +49,6 @@ export class RegisterComponent implements OnInit {
 
   public register(): void {
 
-    console.log();
-    
-    
     this.formValidatorErrors.getFormValidationErrors(this.registerForm);
 
     if (this.registerForm.valid) {
@@ -74,7 +71,7 @@ export class RegisterComponent implements OnInit {
           () => {
 
             this.registering = false;
-
+            this.goToLogin();
           },
           () => {
             this.registering = false;

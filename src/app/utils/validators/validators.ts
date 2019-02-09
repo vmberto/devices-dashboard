@@ -31,3 +31,16 @@ export function nameValidator(control: FormControl): { [key: string]: boolean } 
     return validName(control.value) ? null : { 'nameValidator': true };
 }
 
+export function updateTimeValidator(control: FormControl) {
+    setTimeout(() => {
+        if (control.value > 30) {
+            control.setValue(30);
+        } else if (control.value < 5) {
+            control.setValue(5);
+        }
+    }, 800);
+    return control.value < 30 && control.value > 5 ? Promise.resolve(true) : Promise.resolve(false); 
+
+}
+
+

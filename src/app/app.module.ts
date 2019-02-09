@@ -31,12 +31,14 @@ import {
   RegisterComponent,
   StartIndexComponent,
   DevicesListComponent,
-  DevicesIndexComponent
+  DevicesIndexComponent,
+  DevicesMessagesComponent
 } from './components';
 
 // Directives
 import { ModalDirective } from './directives/modal.directive';
 import { ChangeColorDirective } from './directives/background-color.directive';
+import { MessageCardComponent } from './components/generic-components/message-card/message-card.component';
 
 registerLocaleData(localePt);
 @NgModule({
@@ -60,7 +62,9 @@ registerLocaleData(localePt);
     RegisterComponent,
     StartIndexComponent,
     DevicesListComponent,
-    DevicesIndexComponent
+    DevicesIndexComponent,
+    DevicesMessagesComponent,
+    MessageCardComponent
   ],
   imports: [
     BrowserModule,
