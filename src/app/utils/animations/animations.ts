@@ -1,4 +1,4 @@
-import { trigger, animate, style, query, stagger, transition, keyframes } from '@angular/animations';
+import { trigger, animate, style, query, stagger, transition, keyframes, group } from '@angular/animations';
 
 export const showup = trigger('showup', [
     transition('void => *', [
@@ -78,5 +78,24 @@ export const showCreateInput = trigger('showCreateInput', [
     transition('* => void', [
         style({ transform: 'translateX(0)' }),
         animate(250, style({ transform: 'translateX(-120%)' }))
+    ])
+]);
+
+export const routerTransition = trigger('routerTransition', [
+    transition('* <=> *', [
+      /* order */
+      /* 1 */ query(':enter, :leave', style({ position: 'fixed', width: '100%' })
+            , { optional: true }),
+    /* 2 */ query('.block', style({ opacity: 0 }), { optional: true }),
+      /* 3 */ group([  // block executes in parallel
+            query(':enter', [
+                style({ transform: 'translateX(100%)' }),
+                animate('0.5s ease-in-out', style({ transform: 'translateX(0%)' }))
+            ], { optional: true }),
+            query(':leave', [
+                style({ transform: 'translateX(0%)' }),
+                animate('0.5s ease-in-out', style({ transform: 'translateX(-100%)' }))
+            ], { optional: true }),
+        ]),
     ])
 ]);

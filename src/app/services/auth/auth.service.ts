@@ -25,12 +25,20 @@ export class AuthService {
 
   }
 
+  public registerUser(registerData: any): Observable<any> {
+
+    return this.http.post(`${environment.API_URL}/api/register`,  registerData);
+
+  }
+
 
   public createTokenData(token: string): void {
 
     eraseCookie('auth_token');
 
     const objToken: any = JSON.parse(token);
+    console.log(objToken);
+    
     const expires: number = (typeof objToken === 'object') ? objToken.token.expires_in : 21600;
 
     document.cookie = `auth_token=${token};Max-Age=${expires}`;

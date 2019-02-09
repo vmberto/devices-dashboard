@@ -26,12 +26,15 @@ import {
   DataCardComponent,
   ClientDataComponent,
   ClientsIndexComponent,
+  ClientMessagesComponent,
+  ClientEnvironmentsComponent,
+  RegisterComponent,
+  StartIndexComponent
 } from './components';
 
 // Directives
 import { ModalDirective } from './directives/modal.directive';
-import { ClientMessagesComponent } from './components/pages/clients/clients-show/client-messages/client-messages.component';
-import { ClientEnvironmentsComponent } from './components/pages/clients/clients-show/client-environments/client-environments.component';
+import { ChangeColorDirective } from './directives/background-color.directive';
 
 registerLocaleData(localePt);
 @NgModule({
@@ -49,8 +52,11 @@ registerLocaleData(localePt);
     ClientDataComponent,
     ClientsIndexComponent,
     ModalDirective,
+    ChangeColorDirective,
     ClientMessagesComponent,
     ClientEnvironmentsComponent,
+    RegisterComponent,
+    StartIndexComponent
   ],
   imports: [
     BrowserModule,

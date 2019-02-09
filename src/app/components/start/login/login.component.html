@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" changeBackground>
   <div class="card-body">
     <div class="card-title">
       <img src="../../../assets/img/salvus-logo.PNG" alt="">
@@ -10,9 +10,12 @@
           autocomplete="off" autofocus>
         <input class="form-control form-control-lg" type="password" placeholder="Senha" name="password" formControlName="password"
           autocomplete="off">
-        <button [disabled]="loadingLogin" class="btn btn-primary btn-lg btn-block">
+        <button type="submit" [disabled]="loadingLogin" class="btn btn-primary btn-lg btn-block">
           {{ buttonLogin }}
           <i [hidden]="!loadingLogin" class="fa fa-spinner fa-spin"></i>
+        </button>
+        <button type="button" (click)="goToRegister()" class="btn btn-outline btn-lg btn-block">
+          Cadastrar
         </button>
       </div>
 

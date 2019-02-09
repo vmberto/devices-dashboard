@@ -7,12 +7,23 @@ import {
   ClientsListComponent,
   ClientsCreateComponent,
   ClientsShowComponent,
-  ClientsIndexComponent
+  ClientsIndexComponent,
+  RegisterComponent,
+  StartIndexComponent
 } from './components';
 
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+
+  {
+    path: '', component: StartIndexComponent, children:
+      [
+        { path: '', redirectTo: 'login', pathMatch: 'full' },
+        { path: 'login', component: LoginComponent },
+        { path: 'register', component: RegisterComponent },
+      ]
+  },
+
   {
     path: 'home', canActivate: [AuthGuardService], component: RootComponent, children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

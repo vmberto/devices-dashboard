@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services';
-import { ToastService } from '../generic-components/toast';
+import { ToastService } from 'src/app/components/generic-components/toast';
 import { FormValidatorErrors } from 'src/app/utils/validators/errors.validators';
 
 @Component({
@@ -12,7 +12,6 @@ import { FormValidatorErrors } from 'src/app/utils/validators/errors.validators'
 })
 export class LoginComponent implements OnInit {
   public currentYear = new Date();
-  public currentVersion = '1.0.0';
 
   public loginForm: FormGroup;
   public loadingLogin: boolean;
@@ -39,12 +38,12 @@ export class LoginComponent implements OnInit {
 
 
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
     });
   }
 
-  login() {
+  public login() {
 
     this.formValidatorErrors.getFormValidationErrors(this.loginForm);
 
@@ -74,6 +73,10 @@ export class LoginComponent implements OnInit {
             this.buttonLogin = 'Entrar';
           });
     }
+  }
+
+  public goToRegister() {
+    this.route.navigate(['./register'])
   }
 
 }

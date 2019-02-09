@@ -6,7 +6,6 @@
     text-align: center;
     box-shadow: var(--box-shadow);
     
-    animation: showup 1s;
     -webkit-transition: all 500ms;
     -moz-transition: all 500ms;
     -ms-transition: all 500ms;
@@ -19,11 +18,6 @@
     color: white;
   }
 
-  @keyframes showup {
-      0% {opacity: 0;transform: translateY(-110%);}
-      100% {opacity: 1;transform: translateY(0);}
-  }
-  
   .card-body{
     padding: 35px 70px;
   }

@@ -28,10 +28,6 @@
     border: 3px solid var(--warning)!important;
 }
 
-.toast:hover {
-    background: var(--darker-color-selected);
-}
-
 .toast p {
     margin: 0;
 }

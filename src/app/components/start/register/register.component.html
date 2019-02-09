@@ -1,0 +1,39 @@
+<div class="card" changeBackground>
+
+  <div class="card-body">
+
+    <div class="card-title">
+      <img src="../../../assets/img/salvus-logo.PNG" alt="">
+    </div>
+
+    <form [formGroup]="registerForm" (submit)="register()">
+
+      <div class="form-group">
+
+        <input class="form-control form-control-lg" type="text" placeholder="Nome" name="email" formControlName="name"
+          autocomplete="off" autofocus>
+
+        <input class="form-control form-control-lg" type="text" placeholder="Email" name="email" formControlName="email"
+          autocomplete="off" autofocus>
+
+        <input class="form-control form-control-lg" type="password" placeholder="Senha" name="password"
+          formControlName="password" autocomplete="off">
+
+        <input class="form-control form-control-lg" type="password" placeholder="Confirmar Senha" name="confirm_password"
+          formControlName="confirm_password" autocomplete="off">
+
+
+        <button type="submit" [disabled]="loadingLogin" class="btn btn-primary btn-lg btn-block">
+          {{ buttonRegister }}
+          <i [hidden]="!registering" class="fa fa-spinner fa-spin"></i>
+        </button>
+
+        <button type="button" (click)="goToLogin()" class="btn btn-outline btn-lg btn-block">
+          Voltar
+        </button>
+      </div>
+
+    </form>
+    <small>{{ currentYear | date:'yyyy' }} © Umberto</small>
+  </div>
+</div>

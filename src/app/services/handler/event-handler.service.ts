@@ -78,7 +78,9 @@ export class EventHandler {
    * @param {any} event
    */
   private handle422(event: any): void {
-    this.toastService.show({ text: event.error.msg || 'Ocorreu um erro', type: 'danger' });
+    console.log(event);
+    
+    this.toastService.show({ text: event.error.msg || event.error[0].msg || 'Ocorreu um erro', type: 'danger' });
   }
 
 
