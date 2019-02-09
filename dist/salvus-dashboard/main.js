@@ -2320,26 +2320,28 @@ var RegisterComponent = /** @class */ (function () {
         });
     };
     RegisterComponent.prototype.register = function () {
-        // this.formValidatorErrors.getFormValidationErrors(this.registerForm);
         var _this = this;
-        // if (this.registerForm.valid) {
-        //   const formControls = this.registerForm.controls;
-        //   const registerData = {
-        //     name: formControls.name.value,
-        //     email: formControls.email.value,
-        //     password: formControls.password.value,
-        //     confirm_password: formControls.confirm_password.value
-        //   }
-        //   this.registering = true;
-        //   this.buttonRegister = 'Cadastrando';
-        this.authService.registerUser(1)
-            .subscribe(function () {
-            _this.registering = false;
-        }, function () {
-            _this.registering = false;
-            _this.buttonRegister = 'Cadastrar';
-        });
-        // }
+        this.formValidatorErrors.getFormValidationErrors(this.registerForm);
+        if (this.registerForm.valid) {
+            var formControls = this.registerForm.controls;
+            var registerData = {
+                name: formControls.name.value,
+                email: formControls.email.value,
+                password: formControls.password.value,
+                confirm_password: formControls.confirm_password.value
+            };
+            this.registering = true;
+            this.buttonRegister = 'Cadastrando';
+            this.authService.registerUser(registerData)
+                .subscribe(function () {
+                _this.registering = false;
+                _this.route.navigate(['./login']);
+            }, function () {
+                _this.route.navigate(['./register']);
+                _this.registering = false;
+                _this.buttonRegister = 'Cadastrar';
+            });
+        }
     };
     RegisterComponent.prototype.goToLogin = function () {
         this.route.navigate(['./login']);
@@ -3974,7 +3976,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "config", function() { return config; });
 var config = {
     production: false,
-    API_URL: 'https://salvusserver.herokuapp.com/',
+    API_URL: 'https://salvusserver.herokuapp.com',
 };
 
 
