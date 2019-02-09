@@ -1,4 +1,4 @@
 export const config = {
   production: false,
-  API_URL: 'http://localhost:5000',
+  API_URL: 'https://salvusserver.herokuapp.com/',
 };
