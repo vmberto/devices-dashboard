@@ -364,6 +364,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components */ "./src/app/components/index.ts");
 /* harmony import */ var _directives_modal_directive__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./directives/modal.directive */ "./src/app/directives/modal.directive.ts");
 /* harmony import */ var _directives_background_color_directive__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./directives/background-color.directive */ "./src/app/directives/background-color.directive.ts");
+/* harmony import */ var _components_generic_components_message_card_message_card_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/generic-components/message-card/message-card.component */ "./src/app/components/generic-components/message-card/message-card.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -385,6 +386,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 // Components
 
 // Directives
+
 
 
 Object(_angular_common__WEBPACK_IMPORTED_MODULE_2__["registerLocaleData"])(_angular_common_locales_pt__WEBPACK_IMPORTED_MODULE_3___default.a);
@@ -411,7 +413,11 @@ var AppModule = /** @class */ (function () {
                 _components__WEBPACK_IMPORTED_MODULE_12__["ClientMessagesComponent"],
                 _components__WEBPACK_IMPORTED_MODULE_12__["ClientEnvironmentsComponent"],
                 _components__WEBPACK_IMPORTED_MODULE_12__["RegisterComponent"],
-                _components__WEBPACK_IMPORTED_MODULE_12__["StartIndexComponent"]
+                _components__WEBPACK_IMPORTED_MODULE_12__["StartIndexComponent"],
+                _components__WEBPACK_IMPORTED_MODULE_12__["DevicesListComponent"],
+                _components__WEBPACK_IMPORTED_MODULE_12__["DevicesIndexComponent"],
+                _components__WEBPACK_IMPORTED_MODULE_12__["DevicesMessagesComponent"],
+                _components_generic_components_message_card_message_card_component__WEBPACK_IMPORTED_MODULE_15__["MessageCardComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_5__["BrowserModule"],
@@ -455,6 +461,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _services_auth_auth_guard_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./services/auth/auth-guard.service */ "./src/app/services/auth/auth-guard.service.ts");
 /* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components */ "./src/app/components/index.ts");
+/* harmony import */ var _components_pages_devices_devices_index_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/pages/devices/devices-index.component */ "./src/app/components/pages/devices/devices-index.component.ts");
+/* harmony import */ var _components_pages_devices_devices_list_devices_list_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/pages/devices/devices-list/devices-list.component */ "./src/app/components/pages/devices/devices-list/devices-list.component.ts");
+
+
 
 
 
@@ -462,8 +472,8 @@ var routes = [
     {
         path: '', component: _components__WEBPACK_IMPORTED_MODULE_2__["StartIndexComponent"], children: [
             { path: '', redirectTo: 'login', pathMatch: 'full' },
-            { path: 'login', component: _components__WEBPACK_IMPORTED_MODULE_2__["LoginComponent"] },
             { path: 'register', component: _components__WEBPACK_IMPORTED_MODULE_2__["RegisterComponent"] },
+            { path: 'login', component: _components__WEBPACK_IMPORTED_MODULE_2__["LoginComponent"] },
         ]
     },
     {
@@ -474,6 +484,12 @@ var routes = [
                 path: 'clients', component: _components__WEBPACK_IMPORTED_MODULE_2__["ClientsIndexComponent"], data: { title: 'clientes' }, children: [
                     { path: '', component: _components__WEBPACK_IMPORTED_MODULE_2__["ClientsListComponent"] },
                     { path: 'create', component: _components__WEBPACK_IMPORTED_MODULE_2__["ClientsCreateComponent"] },
+                    { path: 'show/:id', component: _components__WEBPACK_IMPORTED_MODULE_2__["ClientsShowComponent"] },
+                ]
+            },
+            {
+                path: 'devices', component: _components_pages_devices_devices_index_component__WEBPACK_IMPORTED_MODULE_3__["DevicesIndexComponent"], data: { title: 'dispositivos' }, children: [
+                    { path: '', component: _components_pages_devices_devices_list_devices_list_component__WEBPACK_IMPORTED_MODULE_4__["DevicesListComponent"] },
                     { path: 'show/:id', component: _components__WEBPACK_IMPORTED_MODULE_2__["ClientsShowComponent"] },
                 ]
             },
@@ -569,6 +585,73 @@ var DataCardComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [])
     ], DataCardComponent);
     return DataCardComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/components/generic-components/message-card/message-card.component.css":
+/*!***************************************************************************************!*\
+  !*** ./src/app/components/generic-components/message-card/message-card.component.css ***!
+  \***************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".message {\r\n    padding: 15px 30px;\r\n    background: var(--font-color);\r\n    border-radius: 15px;\r\n    margin-bottom: 5px;\r\n    border-left: 7px solid var(--secondary-color);\r\n\r\n    font-weight: 400!important;\r\n    letter-spacing: 1px;\r\n    text-transform: uppercase;\r\n  \r\n}\r\n\r\n.message-device {\r\n    text-align: left;\r\n}\r\n\r\n.message-timestamp {\r\n    text-align: right;\r\n}\r\n"
+
+/***/ }),
+
+/***/ "./src/app/components/generic-components/message-card/message-card.component.html":
+/*!****************************************************************************************!*\
+  !*** ./src/app/components/generic-components/message-card/message-card.component.html ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"message\">\r\n\r\n  <div class=\"row\">\r\n\r\n    <div class=\"col-md-4 message-device\">\r\n      Dispositivo {{ device.deviceId }}\r\n    </div>\r\n    <div class=\"col-md-4 data-label\" style=\"text-align: center;\">\r\n      <strong>{{ device.temperature }}&deg;</strong>\r\n    </div>\r\n\r\n    <div class=\"col-md-4 message-timestamp\">\r\n      {{ device.createdAt | date:'dd/MM/yyyy HH:mm:ss' }}\r\n    </div>\r\n\r\n  </div>\r\n\r\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/components/generic-components/message-card/message-card.component.ts":
+/*!**************************************************************************************!*\
+  !*** ./src/app/components/generic-components/message-card/message-card.component.ts ***!
+  \**************************************************************************************/
+/*! exports provided: MessageCardComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MessageCardComponent", function() { return MessageCardComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var MessageCardComponent = /** @class */ (function () {
+    function MessageCardComponent() {
+    }
+    MessageCardComponent.prototype.ngOnInit = function () {
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], MessageCardComponent.prototype, "device", void 0);
+    MessageCardComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-message-card',
+            template: __webpack_require__(/*! ./message-card.component.html */ "./src/app/components/generic-components/message-card/message-card.component.html"),
+            styles: [__webpack_require__(/*! ./message-card.component.css */ "./src/app/components/generic-components/message-card/message-card.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], MessageCardComponent);
+    return MessageCardComponent;
 }());
 
 
@@ -682,7 +765,7 @@ var ToastRef = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".toast {\r\n    position: relative;\r\n    display: flex;\r\n    justify-content: space-around;\r\n    margin-bottom: 20px;\r\n    font-size: 90%;\r\n    padding: 14px; \r\n    width: auto;\r\n    word-wrap: none;\r\n    overflow: hidden;\r\n    background: var(--main-color);\r\n    box-shadow: var(--box-shadow);\r\n    cursor: pointer;\r\n    transition: all .3s;\r\n    border-radius: 10px;\r\n    border: 3px transparent;\r\n}\r\n\r\n.success {\r\n    border: 3px solid var(--success)!important;\r\n}\r\n\r\n.danger {\r\n    border: 3px solid var(--danger)!important;\r\n}\r\n\r\n.warning {\r\n    border: 3px solid var(--warning)!important;\r\n}\r\n\r\n.toast p {\r\n    margin: 0;\r\n}"
+module.exports = ".toast {\r\n    position: relative;\r\n    display: flex;\r\n    justify-content: space-around;\r\n    margin-bottom: 20px;\r\n    font-size: 90%;\r\n    padding: 14px; \r\n    width: auto;\r\n    word-wrap: none;\r\n    overflow: hidden;\r\n    background: var(--main-color);\r\n    box-shadow: var(--box-shadow);\r\n    cursor: pointer;\r\n    transition: all .3s;\r\n    border-radius: 10px;\r\n    border: 3px transparent;\r\n}\r\n\r\n.success {\r\n    border: 3px solid var(--success-color)!important;\r\n}\r\n\r\n.danger {\r\n    border: 3px solid var(--danger)!important;\r\n}\r\n\r\n.warning {\r\n    border: 3px solid var(--warning)!important;\r\n}\r\n\r\n.toast p {\r\n    margin: 0;\r\n}"
 
 /***/ }),
 
@@ -940,7 +1023,7 @@ var ToastService = /** @class */ (function () {
 /*!*************************************!*\
   !*** ./src/app/components/index.ts ***!
   \*************************************/
-/*! exports provided: AppComponent, RootComponent, SidebarComponent, StartIndexComponent, LoginComponent, RegisterComponent, DashboardComponent, DataCardComponent, ClientsIndexComponent, ClientsListComponent, ClientsCreateComponent, ClientsShowComponent, ClientDataComponent, ClientMessagesComponent, ClientEnvironmentsComponent */
+/*! exports provided: AppComponent, RootComponent, SidebarComponent, StartIndexComponent, LoginComponent, RegisterComponent, DashboardComponent, DataCardComponent, ClientsIndexComponent, ClientsListComponent, ClientsCreateComponent, ClientsShowComponent, ClientDataComponent, ClientMessagesComponent, ClientEnvironmentsComponent, DevicesIndexComponent, DevicesListComponent, DevicesMessagesComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -990,6 +1073,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_clients_clients_show_client_environments_client_environments_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./pages/clients/clients-show/client-environments/client-environments.component */ "./src/app/components/pages/clients/clients-show/client-environments/client-environments.component.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ClientEnvironmentsComponent", function() { return _pages_clients_clients_show_client_environments_client_environments_component__WEBPACK_IMPORTED_MODULE_14__["ClientEnvironmentsComponent"]; });
 
+/* harmony import */ var _pages_devices_devices_index_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./pages/devices/devices-index.component */ "./src/app/components/pages/devices/devices-index.component.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DevicesIndexComponent", function() { return _pages_devices_devices_index_component__WEBPACK_IMPORTED_MODULE_15__["DevicesIndexComponent"]; });
+
+/* harmony import */ var _pages_devices_devices_list_devices_list_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./pages/devices/devices-list/devices-list.component */ "./src/app/components/pages/devices/devices-list/devices-list.component.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DevicesListComponent", function() { return _pages_devices_devices_list_devices_list_component__WEBPACK_IMPORTED_MODULE_16__["DevicesListComponent"]; });
+
+/* harmony import */ var _pages_devices_devices_messages_devices_messages_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./pages/devices/devices-messages/devices-messages.component */ "./src/app/components/pages/devices/devices-messages/devices-messages.component.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DevicesMessagesComponent", function() { return _pages_devices_devices_messages_devices_messages_component__WEBPACK_IMPORTED_MODULE_17__["DevicesMessagesComponent"]; });
+
+
+
+
 
 
 
@@ -1027,7 +1122,7 @@ module.exports = "small {\r\n    font-size: 60%;\r\n}\r\n\r\n.finding-cep {\r\n 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n  <div class=\"col-xl-8 col-lg-12 col-md-12 col-sm-12\">\r\n\r\n    <div class=\"panel\">\r\n\r\n      <div class=\"panel-head\">\r\n        <button routerLink=\"..\" class=\"return-btn btn btn-primary btn-sm\">\r\n          <i class=\"fa fa-arrow-left\"></i>\r\n        </button>\r\n        <h4 class=\"panel-title\">\r\n          Cadastrar Cliente\r\n        </h4>\r\n\r\n      </div>\r\n\r\n\r\n      <div class=\"panel-body\">\r\n        <form [formGroup]=\"patientForm\" (submit)=\"submitPatientData()\">\r\n\r\n          <div class=\"form-row\">\r\n\r\n            <div class=\"col-md-4\">\r\n              <div class=\"form-group\">\r\n                <label>Nome</label>\r\n                <input formControlName=\"name\" type=\"text\" class=\"form-control\" placeholder=\"Umberto Barros\">\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"col-md-4\">\r\n              <div class=\"form-group\">\r\n                <label>Celular<small> &mdash; Opcional</small></label>\r\n                <input formControlName=\"phone\" type=\"text\" class=\"form-control\" placeholder=\"99999 9999\">\r\n              </div>\r\n            </div>\r\n\r\n          </div>\r\n\r\n\r\n          <h5>Endereço</h5>\r\n\r\n          <div class=\"form-row\">\r\n\r\n            <div class=\"col-md-4\">\r\n              <div class=\"form-group\">\r\n                <label>CEP</label>\r\n                <input id=\"address-zip_code\" formControlName=\"zip_code\" (blur)=\"findCep()\" type=\"text\" class=\"form-control\"\r\n                  placeholder=\"00000-000\" maxlength=\"8\">\r\n                <button [@fade] type=\"button\" class=\"pointer finding-cep\" *ngIf=\"findingCep || cepFound\" (click)=\"clearSelectedAddress()\">\r\n                  <i class=\"fa\" [ngClass]=\"{'fa-spinner': findingCep, 'fa-spin': findingCep, 'fa-times': cepFound}\"></i>\r\n                </button>\r\n              </div>\r\n            </div>\r\n\r\n\r\n            <div class=\"col-md-4\">\r\n              <div class=\"form-group\">\r\n                <label>Cidade</label>\r\n                <input id=\"address-city\" formControlName=\"city\" type=\"text\" class=\"form-control\" placeholder=\"Recife\">\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"col-md-4\">\r\n              <div class=\"form-group\">\r\n                <label>Bairro</label>\r\n                <input id=\"address-district\" formControlName=\"district\" type=\"text\" class=\"form-control\" placeholder=\"Tamarineira\">\r\n              </div>\r\n            </div>\r\n\r\n          </div>\r\n\r\n          <div class=\"row\">\r\n\r\n            <div class=\"col-md-6\">\r\n              <div class=\"form-group\">\r\n                <label>Rua</label>\r\n                <input id=\"address-street\" formControlName=\"street\" type=\"text\" class=\"form-control\" placeholder=\"Av. Caxangá\">\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"col-md-3\">\r\n              <div class=\"form-group\">\r\n                <label>Número</label>\r\n                <input id=\"address-number\" formControlName=\"number\" type=\"text\" class=\"form-control\" placeholder=\"000\">\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"col-md-3\">\r\n              <div class=\"form-group\">\r\n                <label>Complemento<small> &mdash; Opcional</small></label>\r\n                <input formControlName=\"complement\" type=\"text\" class=\"form-control\" placeholder=\"Aptº 0000\">\r\n              </div>\r\n            </div>\r\n\r\n          </div>\r\n\r\n          <button [disabled]=\"creatingPatient\" type=\"submit\" class=\"btn btn-success btn-sm pull-right\">{{creatingPatient ?\r\n            'Criando' : 'Criar'}} <i *ngIf=\"creatingPatient\" class=\"fa fa-spinner fa-spin\"></i></button>\r\n\r\n        </form>\r\n\r\n      </div>\r\n\r\n\r\n\r\n    </div>\r\n\r\n\r\n  </div>"
+module.exports = "<div class=\"row\">\r\n  <div class=\"col-xl-8 col-lg-12 col-md-12 col-sm-12\">\r\n\r\n    <div class=\"panel\">\r\n\r\n      <div class=\"panel-head\">\r\n        <button routerLink=\"..\" class=\"return-btn btn btn-primary btn-sm\">\r\n          <i class=\"fa fa-arrow-left\"></i>\r\n        </button>\r\n        <h4 class=\"panel-title\">\r\n          Cadastrar Cliente\r\n        </h4>\r\n\r\n      </div>\r\n\r\n\r\n      <div class=\"panel-body\">\r\n        <form [formGroup]=\"patientForm\" (submit)=\"submitPatientData()\">\r\n\r\n          <div class=\"form-row\">\r\n\r\n            <div class=\"col-md-4\">\r\n              <div class=\"form-group\">\r\n                <label>Nome</label>\r\n                <input formControlName=\"name\" type=\"text\" class=\"form-control\" placeholder=\"Umberto Barros\">\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"col-md-4\">\r\n              <div class=\"form-group\">\r\n                <label>Celular</label>\r\n                <input formControlName=\"phone\" type=\"text\" class=\"form-control\" placeholder=\"99999 9999\">\r\n              </div>\r\n            </div>\r\n\r\n          </div>\r\n\r\n\r\n          <h5>Endereço</h5>\r\n\r\n          <div class=\"form-row\">\r\n\r\n            <div class=\"col-md-4\">\r\n              <div class=\"form-group\">\r\n                <label>CEP</label>\r\n                <input id=\"address-zip_code\" formControlName=\"zip_code\" (blur)=\"findCep()\" type=\"text\" class=\"form-control\"\r\n                  placeholder=\"00000-000\" maxlength=\"8\">\r\n                <button [@fade] type=\"button\" class=\"pointer finding-cep\" *ngIf=\"findingCep || cepFound\" (click)=\"clearSelectedAddress()\">\r\n                  <i class=\"fa\" [ngClass]=\"{'fa-spinner': findingCep, 'fa-spin': findingCep, 'fa-times': cepFound}\"></i>\r\n                </button>\r\n              </div>\r\n            </div>\r\n\r\n\r\n            <div class=\"col-md-4\">\r\n              <div class=\"form-group\">\r\n                <label>Cidade</label>\r\n                <input id=\"address-city\" formControlName=\"city\" type=\"text\" class=\"form-control\" placeholder=\"Recife\">\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"col-md-4\">\r\n              <div class=\"form-group\">\r\n                <label>Bairro</label>\r\n                <input id=\"address-district\" formControlName=\"district\" type=\"text\" class=\"form-control\" placeholder=\"Tamarineira\">\r\n              </div>\r\n            </div>\r\n\r\n          </div>\r\n\r\n          <div class=\"row\">\r\n\r\n            <div class=\"col-md-6\">\r\n              <div class=\"form-group\">\r\n                <label>Rua</label>\r\n                <input id=\"address-street\" formControlName=\"street\" type=\"text\" class=\"form-control\" placeholder=\"Av. Caxangá\">\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"col-md-3\">\r\n              <div class=\"form-group\">\r\n                <label>Número</label>\r\n                <input id=\"address-number\" formControlName=\"number\" type=\"text\" class=\"form-control\" placeholder=\"000\">\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"col-md-3\">\r\n              <div class=\"form-group\">\r\n                <label>Complemento<small> &mdash; Opcional</small></label>\r\n                <input formControlName=\"complement\" type=\"text\" class=\"form-control\" placeholder=\"Aptº 0000\">\r\n              </div>\r\n            </div>\r\n\r\n          </div>\r\n\r\n          <button [disabled]=\"creatingPatient\" type=\"submit\" class=\"btn btn-success btn-sm pull-right\">{{creatingPatient ?\r\n            'Criando' : 'Criar'}} <i *ngIf=\"creatingPatient\" class=\"fa fa-spinner fa-spin\"></i></button>\r\n\r\n        </form>\r\n\r\n      </div>\r\n\r\n\r\n\r\n    </div>\r\n\r\n\r\n  </div>"
 
 /***/ }),
 
@@ -1238,7 +1333,7 @@ module.exports = "ul {\r\n    margin: 0;\r\n    -webkit-transform: translateY(44
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n\r\n<div class=\"panel\" style=\"padding: 0;\">\r\n\r\n  <div class=\"panel-head\" style=\"background: none; padding: 20px 20px 0 20px;\">\r\n\r\n    <div class=\"table-actions\">\r\n\r\n      <button routerLink=\"create\" class=\"btn btn-primary btn-sm\">\r\n        <i class=\"fa fa-user-plus\"></i>\r\n        Cadastrar Cliente\r\n      </button>\r\n\r\n    </div>\r\n\r\n  </div>\r\n\r\n\r\n  <div class=\"panel-body\" style=\"padding: 0 20px 15px 20px;\">\r\n\r\n    <div class=\"table-wrapper\" style=\"margin: 20px 0 0 0\">\r\n\r\n\r\n      <div class=\"tableStyles\">\r\n\r\n\r\n        <table class=\"table align-items-center table-flush\">\r\n          <thead class=\"thead-light\">\r\n            <th *ngFor=\"let tableHead of tableHeaders\">\r\n\r\n              <a *ngIf=\"tableHead.sortable; else noSort\" class=\"pointer\" (click)=\"changeSort(tableHead)\">\r\n                {{tableHead.title}}\r\n                <i class=\"fa\" [ngClass]=\"{'fa-caret-up': tableHead.sorted === 'asc', 'fa-caret-down': tableHead.sorted === 'desc'}\"></i>\r\n              </a>\r\n              <ng-template #noSort>\r\n                {{tableHead.title}}\r\n              </ng-template>\r\n\r\n            </th>\r\n            <th></th>\r\n          </thead>\r\n          <tbody *ngIf=\"tableData\">\r\n\r\n            <tr *ngFor=\"let client of tableData\" class=\"line\">\r\n              <td>\r\n                {{ client.name }}\r\n              </td>\r\n              <td>\r\n                {{client.phone}}\r\n              </td>\r\n              <td>\r\n                {{client.environments.length }}\r\n              </td>\r\n              <td>\r\n                {{client.createdAt | date:'dd/MM/yyyy'}}\r\n              </td>\r\n              <td>\r\n                <button class=\"btn btn-sm btn-success\"  (click)=\"show(client.id)\">\r\n                  <i class=\"fa fa-search\"></i>\r\n                </button>\r\n              </td>\r\n            </tr>\r\n\r\n          </tbody>\r\n\r\n          <tbody *ngIf=\"!tableData || tableData.length <= 0\">\r\n            <tr>\r\n              <td colspan=\"5\" style=\"text-align: center\">NENHUM CLIENTE CADASTRADO</td>\r\n            </tr>\r\n          </tbody>\r\n          \r\n        </table>\r\n\r\n\r\n      </div>\r\n\r\n      <div class=\"row tablePagination\">\r\n\r\n        <div class=\"input-group col-xl-2 col-lg-4 col-md-4 col-sm-6 col-12 mb-3\">\r\n          <div class=\"input-group-prepend\">\r\n            <label class=\"input-group-text\" for=\"list-limit\">Limite</label>\r\n          </div>\r\n          <select id=\"list-limit\" [(ngModel)]=\"selectedSize\" (change)=\"limitChange(selectedSize)\" class=\"custom-select\">\r\n            <option *ngFor=\"let pageSize of pageSizeOptions\" [value]=\"pageSize\">{{pageSize}}</option>\r\n          </select>\r\n        </div>\r\n\r\n        <div class=\"btn-group col-xl-4 col-lg-8 col-md-8 col-sm-12 col-12\" role=\"group\">\r\n\r\n          <button type=\"button\" [disabled]=\"!tableMetaData || tableMetaData?.paginationConfig.current_page === 1\" class=\"btn btn-outline\"\r\n            (click)=\"paginationChange(tableMetaData?.paginationConfig.current_page - 1)\">\r\n            <i class=\"fa fa-angle-left\"></i>\r\n          </button>\r\n\r\n          <button type=\"button\" class=\"btn btn-primary\">{{ tableMetaData?.paginationConfig.current_page || 1}}</button>\r\n\r\n          <button type=\"button\" [disabled]=\"tableMetaData?.paginationConfig.current_page === tableMetaData?.paginationConfig.total_pages\"\r\n            class=\"btn btn-outline\" (click)=\"paginationChange(tableMetaData?.paginationConfig.current_page + 1)\">\r\n            <i class=\"fa fa-angle-right\"></i>\r\n          </button>\r\n\r\n        </div>\r\n\r\n      </div>\r\n\r\n    </div>\r\n\r\n\r\n  </div>\r\n\r\n\r\n</div>\r\n\r\n<!-- <app-patients-list-filter *ngIf=\"tableMetaData && tableMetaData.filterConfig\" [filterConfig]=\"tableMetaData.filterConfig\"\r\n  [hidden]=\"!(filtersFormOpen === 'open')\" (closeModal)=\"changeFiltersModalState($event)\" (sendFilters)=\"submitFilters($event)\">\r\n</app-patients-list-filter> -->"
+module.exports = "\r\n\r\n<div class=\"panel\" style=\"padding: 0;\">\r\n\r\n  <div class=\"panel-head\" style=\"background: none; padding: 20px 20px 0 20px;\">\r\n\r\n    <div class=\"table-actions\">\r\n\r\n      <button routerLink=\"create\" class=\"btn btn-primary btn-sm\">\r\n        <i class=\"fa fa-user-plus\"></i>\r\n        Cadastrar Cliente\r\n      </button>\r\n\r\n    </div>\r\n\r\n  </div>\r\n\r\n\r\n  <div class=\"panel-body\" style=\"padding: 0 20px 15px 20px;\">\r\n\r\n    <div class=\"table-wrapper\" style=\"margin: 20px 0 0 0\">\r\n\r\n\r\n      <div class=\"tableStyles\">\r\n\r\n\r\n        <table class=\"table align-items-center table-flush table-responsive-sm\">\r\n          <thead class=\"thead-light\">\r\n            <th *ngFor=\"let tableHead of tableHeaders\">\r\n\r\n              <a *ngIf=\"tableHead.sortable; else noSort\" class=\"pointer\" (click)=\"changeSort(tableHead)\">\r\n                {{tableHead.title}}\r\n                <i class=\"fa\" [ngClass]=\"{'fa-caret-up': tableHead.sorted === 'asc', 'fa-caret-down': tableHead.sorted === 'desc'}\"></i>\r\n              </a>\r\n              <ng-template #noSort>\r\n                {{tableHead.title}}\r\n              </ng-template>\r\n\r\n            </th>\r\n            <th></th>\r\n          </thead>\r\n          <tbody *ngIf=\"tableData\">\r\n\r\n            <tr *ngFor=\"let client of tableData\" class=\"line\">\r\n              <td>\r\n                {{ client.name }}\r\n              </td>\r\n              <td>\r\n                {{client.phone}}\r\n              </td>\r\n              <td>\r\n                {{client.environments.length }}\r\n              </td>\r\n              <td>\r\n                {{client.createdAt | date:'dd/MM/yyyy'}}\r\n              </td>\r\n              <td>\r\n                <button class=\"btn btn-sm btn-success\"  (click)=\"show(client.id)\">\r\n                  <i class=\"fa fa-search\"></i>\r\n                </button>\r\n              </td>\r\n            </tr>\r\n\r\n          </tbody>\r\n\r\n          <tbody *ngIf=\"!tableData || tableData.length <= 0\">\r\n            <tr>\r\n              <td colspan=\"5\" style=\"text-align: center\">NENHUM CLIENTE CADASTRADO</td>\r\n            </tr>\r\n          </tbody>\r\n          \r\n        </table>\r\n\r\n\r\n      </div>\r\n\r\n      <div class=\"row tablePagination\">\r\n\r\n        <div class=\"input-group col-xl-2 col-lg-4 col-md-4 col-sm-6 col-12 mb-3\">\r\n          <div class=\"input-group-prepend\">\r\n            <label class=\"input-group-text\" for=\"list-limit\">Limite</label>\r\n          </div>\r\n          <select id=\"list-limit\" [(ngModel)]=\"selectedSize\" (change)=\"limitChange(selectedSize)\" class=\"custom-select\">\r\n            <option *ngFor=\"let pageSize of pageSizeOptions\" [value]=\"pageSize\">{{pageSize}}</option>\r\n          </select>\r\n        </div>\r\n\r\n        <div class=\"btn-group col-xl-4 col-lg-8 col-md-8 col-sm-12 col-12\" role=\"group\">\r\n\r\n          <button type=\"button\" [disabled]=\"!tableMetaData || tableMetaData?.paginationConfig.current_page === 1\" class=\"btn btn-outline\"\r\n            (click)=\"paginationChange(tableMetaData?.paginationConfig.current_page - 1)\">\r\n            <i class=\"fa fa-angle-left\"></i>\r\n          </button>\r\n\r\n          <button type=\"button\" class=\"btn btn-primary\">{{ tableMetaData?.paginationConfig.current_page || 1}}</button>\r\n\r\n          <button type=\"button\" [disabled]=\"tableMetaData?.paginationConfig.current_page === tableMetaData?.paginationConfig.total_pages\"\r\n            class=\"btn btn-outline\" (click)=\"paginationChange(tableMetaData?.paginationConfig.current_page + 1)\">\r\n            <i class=\"fa fa-angle-right\"></i>\r\n          </button>\r\n\r\n        </div>\r\n\r\n      </div>\r\n\r\n    </div>\r\n\r\n\r\n  </div>\r\n\r\n\r\n</div>\r\n\r\n<!-- <app-patients-list-filter *ngIf=\"tableMetaData && tableMetaData.filterConfig\" [filterConfig]=\"tableMetaData.filterConfig\"\r\n  [hidden]=\"!(filtersFormOpen === 'open')\" (closeModal)=\"changeFiltersModalState($event)\" (sendFilters)=\"submitFilters($event)\">\r\n</app-patients-list-filter> -->"
 
 /***/ }),
 
@@ -1368,9 +1463,6 @@ var ClientsListComponent = /** @class */ (function (_super) {
             }
             this.loadData();
         }
-    };
-    ClientsListComponent.prototype.openFiltersRow = function () {
-        this.filtersFormOpen = !this.filtersFormOpen;
     };
     /**
      * Direciona para a rota de detalhes do paciente
@@ -1509,7 +1601,7 @@ module.exports = ".environment-form {\r\n    height: auto;\r\n    width: 100%;\r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel\">\r\n\r\n  <div class=\"panel-head\" style=\"margin: 0;\">\r\n\r\n    <h4 class=\"panel-title\">\r\n      Ambientes\r\n    </h4>\r\n\r\n    <button (click)=\"createEnvironmentToggle = !createEnvironmentToggle\" class=\"btn btn-primary btn-sm\">\r\n      <i class=\"fa fa-plus\"></i>\r\n      Cadastrar Ambiente\r\n    </button>\r\n  </div>\r\n\r\n  <div [@collapse] *ngIf=\"createEnvironmentToggle\" class=\"environment-form\">\r\n\r\n    <form [formGroup]=\"environmentForm\" (submit)=\"submitEnvironment()\">\r\n\r\n      <div class=\"row\">\r\n\r\n        <div class=\"col-xl-5\">\r\n          <div class=\"input-group\">\r\n            <div class=\"input-group-prepend\">\r\n              <label class=\"input-group-text\">Nome</label>\r\n            </div>\r\n            <input id=\"name-input\" type=\"text\" class=\"form-control\" placeholder=\"Sala\" formControlName=\"title\">\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-xl-5\">\r\n          <div class=\"input-group\">\r\n            <div class=\"input-group-prepend\">\r\n              <label class=\"input-group-text\">Atualização</label>\r\n            </div>\r\n            <input type=\"number\" min=\"5\" max=\"30\" class=\"form-control\" placeholder=\"10\" formControlName=\"update_time\">\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-md-2\">\r\n          <button class=\"btn btn-block full-width-mobile btn-success pull-right\" type=\"submit\">\r\n            <i class=\"fa fa-check\"\r\n              [ngClass]=\"{'fa-check': !creatingEnvironment, 'fa-spin': creatingEnvironment, 'fa-spinner': creatingEnvironment}\"></i>\r\n          </button>\r\n        </div>\r\n\r\n      </div>\r\n\r\n    </form>\r\n\r\n  </div>\r\n\r\n  <div class=\"panel-body\">\r\n\r\n    <div class=\"table-wrapper\" style=\"margin: 20px 0 0 0\">\r\n\r\n\r\n      <div class=\"tableStyles\">\r\n\r\n\r\n        <table class=\"table align-items-center table-flush\">\r\n\r\n          <tbody *ngIf=\"environments\">\r\n\r\n            <tr *ngFor=\"let environment of environments\" class=\"line\">\r\n              <td>\r\n                {{ environment.title }}\r\n              </td>\r\n              <td>\r\n                Dispositivo {{ environment.deviceId }}\r\n              </td>\r\n              <td>\r\n                <button (click)=\"deleteEnvironment(environment)\" class=\"btn btn-sm btn-danger\"><i class=\"fa fa-trash\"></i></button>\r\n              </td>\r\n            </tr>\r\n\r\n          </tbody>\r\n\r\n          <tbody *ngIf=\"!environments || environments.length <= 0\">\r\n            <tr>\r\n              <td colspan=\"3\" style=\"text-align: center\">Nenhum ambiente cadastrado</td>\r\n            </tr>\r\n          </tbody>\r\n\r\n        </table>\r\n\r\n\r\n      </div>\r\n\r\n    </div>\r\n\r\n  </div>\r\n</div>"
+module.exports = "<div class=\"panel\">\r\n\r\n  <div class=\"panel-head\" style=\"margin: 0;\">\r\n\r\n    <h4 class=\"panel-title\">\r\n      Ambientes\r\n    </h4>\r\n\r\n    <button (click)=\"createEnvironmentToggle = !createEnvironmentToggle\" class=\"btn btn-primary btn-sm\">\r\n      <i class=\"fa fa-plus\"></i>\r\n      Cadastrar Ambiente\r\n    </button>\r\n  </div>\r\n\r\n  <div [@collapse] *ngIf=\"createEnvironmentToggle\" class=\"environment-form\">\r\n\r\n    <form [formGroup]=\"environmentForm\" (submit)=\"submitEnvironment()\">\r\n\r\n      <div class=\"row\">\r\n\r\n        <div class=\"col-xl-5\">\r\n          <div class=\"input-group\">\r\n            <div class=\"input-group-prepend\">\r\n              <label class=\"input-group-text\">Nome</label>\r\n            </div>\r\n            <input id=\"name-input\" type=\"text\" class=\"form-control\" placeholder=\"Sala\" formControlName=\"title\">\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-xl-5\">\r\n          <div class=\"input-group\">\r\n            <div class=\"input-group-prepend\">\r\n              <label class=\"input-group-text\">Atualização</label>\r\n            </div>\r\n            <input type=\"number\" min=\"5\" max=\"30\" class=\"form-control\" placeholder=\"10\" formControlName=\"update_time\">\r\n          </div>\r\n          <small class=\"data-name\" style=\"font-size: 8px; \">Tempo de atualização em segundos entre 5 e 30</small>\r\n\r\n        </div>\r\n\r\n        <div class=\"col-md-2\">\r\n          <button class=\"btn btn-block full-width-mobile btn-success pull-right\" type=\"submit\">\r\n            <i class=\"fa fa-check\"\r\n              [ngClass]=\"{'fa-check': !creatingEnvironment, 'fa-spin': creatingEnvironment, 'fa-spinner': creatingEnvironment}\"></i>\r\n          </button>\r\n        </div>\r\n\r\n      </div>\r\n\r\n    </form>\r\n\r\n  </div>\r\n\r\n  <div class=\"panel-body\">\r\n\r\n    <div class=\"table-wrapper\" style=\"margin: 20px 0 0 0\">\r\n\r\n\r\n      <div class=\"tableStyles\">\r\n\r\n\r\n        <table class=\"table align-items-center table-flush\">\r\n\r\n          <tbody *ngIf=\"environments\">\r\n\r\n            <tr *ngFor=\"let environment of environments\" class=\"line\">\r\n              <td>\r\n                {{ environment.title }}\r\n              </td>\r\n              <td>\r\n                <strong>Dispositivo</strong> {{ environment.deviceId }}\r\n              </td>\r\n              <td>\r\n                <strong>Atualização</strong> {{ environment.device.updateTime / 1000 }} s\r\n              </td>\r\n              <td>\r\n                <button (click)=\"deleteEnvironment(environment)\" class=\"btn btn-sm btn-danger\"><i\r\n                    class=\"fa fa-trash\"></i></button>\r\n              </td>\r\n            </tr>\r\n\r\n          </tbody>\r\n\r\n          <tbody *ngIf=\"!environments || environments.length <= 0\">\r\n            <tr>\r\n              <td colspan=\"3\" style=\"text-align: center\">Nenhum ambiente cadastrado</td>\r\n            </tr>\r\n          </tbody>\r\n\r\n        </table>\r\n\r\n\r\n      </div>\r\n\r\n    </div>\r\n\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -1530,6 +1622,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_utils_validators_errors_validators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/utils/validators/errors.validators */ "./src/app/utils/validators/errors.validators.ts");
 /* harmony import */ var src_app_services__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services */ "./src/app/services/index.ts");
 /* harmony import */ var src_app_services_webksocket_websocket_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services/webksocket/websocket.service */ "./src/app/services/webksocket/websocket.service.ts");
+/* harmony import */ var src_app_utils_validators_validators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/utils/validators/validators */ "./src/app/utils/validators/validators.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1539,6 +1632,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -1560,7 +1654,7 @@ var ClientEnvironmentsComponent = /** @class */ (function () {
     ClientEnvironmentsComponent.prototype.ngOnInit = function () {
         this.environmentForm = this.fb.group({
             title: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]],
-            update_time: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]]
+            update_time: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required], [src_app_utils_validators_validators__WEBPACK_IMPORTED_MODULE_7__["updateTimeValidator"]]]
         });
     };
     ClientEnvironmentsComponent.prototype.submitEnvironment = function () {
@@ -1569,9 +1663,15 @@ var ClientEnvironmentsComponent = /** @class */ (function () {
         if (this.environmentForm.valid) {
             this.creatingEnvironment = true;
             var formControls = this.environmentForm.controls;
+            var updateTime = formControls.update_time.value;
+            if (formControls.update_time.value > 30)
+                updateTime = 30;
+            else if (formControls.update_time.value < 5)
+                updateTime = 5;
             var environmentData = {
                 title: formControls.title.value,
-                clientId: this.clientId
+                clientId: this.clientId,
+                updateTime: updateTime * 1000
             };
             this.environmentsService.post(environmentData)
                 .subscribe(function (res) {
@@ -1634,7 +1734,7 @@ module.exports = ".message {\r\n    padding: 15px 30px;\r\n    background: rgba(
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel\" style=\"overflow-x:hidden\">\r\n\r\n  <div class=\"panel-head\">\r\n\r\n    <h4 class=\"panel-title\">\r\n      Mensagens\r\n    </h4>\r\n\r\n  </div>\r\n\r\n\r\n  <div class=\"panel-body\">\r\n\r\n\r\n    <div id=\"container\" [@listObjShow]=\"messages.length\">\r\n\r\n      <div class=\"message\" *ngFor=\"let device of messages; let index = index\">\r\n\r\n        <div class=\"row\">\r\n\r\n          <div class=\"col-md-4\">Dispositivo {{ device.deviceId }}</div>\r\n          <div class=\"col-md-4\">{{ device.temperature }}&deg;</div>\r\n          <div class=\"col-md-4\">{{ device.createdAt | date:'dd/MM/yyyy HH:mm:ss' }}</div>\r\n\r\n        </div>\r\n\r\n      </div>\r\n\r\n    </div>\r\n\r\n  </div>\r\n\r\n\r\n</div>"
+module.exports = "<div class=\"panel\" style=\"overflow-x:hidden\">\r\n\r\n  <div class=\"panel-head\">\r\n\r\n    <h4 class=\"panel-title\">\r\n      Mensagens\r\n    </h4>\r\n\r\n  </div>\r\n\r\n\r\n  <div class=\"panel-body\">\r\n\r\n\r\n    <div id=\"container\" [@listObjShow]=\"messages.length\">\r\n\r\n      <div *ngFor=\"let device of messages; let index = index\">\r\n        <app-message-card [device]=\"device\">\r\n        </app-message-card>\r\n      </div>\r\n\r\n    </div>\r\n\r\n  </div>\r\n\r\n\r\n</div>"
 
 /***/ }),
 
@@ -1677,7 +1777,7 @@ var ClientMessagesComponent = /** @class */ (function () {
     }
     ClientMessagesComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.messagesService.get({ id: this.shareDataService.client.id }).subscribe(function (res) {
+        this.messagesService.get({ id: this.shareDataService.client.id, url: 'clients' }).subscribe(function (res) {
             _this.messages = res.data;
         });
         this.webSocket.messageEvent.subscribe(function (message) {
@@ -1822,7 +1922,7 @@ module.exports = "@media only screen and (max-width: 768px) {\r\n  .page-title {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n    <div class=\"col-xl-2 col-lg-4 col-md-6 col-sm-6 col-12\">\r\n        <app-data-card \r\n            [cardTitle]=\"'Total de Clientes'\"\r\n            [cardData]=\"clientsCounter | async\"\r\n            \r\n            [subCardIcon]=\"'fa fa-street-view'\" \r\n            [subCardTitle]=\"'ambientes'\"\r\n            [subCardData]=\"environmentsCounter | async\"\r\n\r\n            [routerLink]=\"'/home/clients'\">\r\n        </app-data-card>\r\n    </div>\r\n</div>\r\n<div class=\"row\">\r\n    <div class=\"col-xl-6 col-lg-8 col-md-12 col-sm-12 col-12\">\r\n        <div class=\"card\">\r\n            <div class=\"card-head\">\r\n                <h5 class=\"card-title data-name\">Relação Pacientes x Planos de Saúde</h5>\r\n            </div>\r\n            <div class=\"card-body\">\r\n                <canvas id=\"patientsHealthInsuranceChart\"></canvas>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"col-xl-6 col-lg-8 col-md-12 col-sm-12 col-12\">\r\n        <div class=\"card\">\r\n            <div class=\"card-head\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-md-6\">\r\n                        <h5 class=\"card-title data-name\">Últimas Atualizações</h5>\r\n                    </div>\r\n                    <div class=\"col-md-6\">\r\n                        <nav id=\"menu\">\r\n                            <ul>\r\n                                <li>\r\n                                    <select type=\"date\" class=\"form-control\" [ngModel]=\"startDate | date:'yyyy-MM-dd'\"\r\n                                        (ngModelChange)=\"startDate = $event\" (change)=\"recalculateSessions()\">\r\n                                    </select>\r\n                                </li>\r\n                            </ul>\r\n                        </nav>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"card-body\">\r\n                <canvas id=\"lastWeekSessionsChart\"></canvas>\r\n            </div>\r\n            <div class=\"card-footer\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12\">\r\n                        <h5 class=\"data-name\">Total de Horas </h5>\r\n                        <p>{{ totalHoursWorked || ' -- ' }}</p>\r\n                    </div>\r\n                    <div class=\"col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12\">\r\n                        <h5 class=\"data-name\">Pacientes Atendidos </h5>\r\n                        <p>{{ !attendedPatients || attendedPatients === 0 ? 0 : attendedPatients }}</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"row\">\r\n    <div class=\"col-xl-2 col-lg-4 col-md-6 col-sm-6 col-12\">\r\n        <app-data-card \r\n            [cardTitle]=\"'Total de Clientes'\"\r\n            [cardData]=\"clientsCounter | async\"\r\n            \r\n            [subCardIcon]=\"'fa fa-street-view'\" \r\n            [subCardTitle]=\"'ambientes'\"\r\n            [subCardData]=\"environmentsCounter | async\"\r\n\r\n            [routerLink]=\"'/home/clients'\">\r\n        </app-data-card>\r\n    </div>\r\n</div>\r\n<!-- <div class=\"row\">\r\n    <div class=\"col-xl-6 col-lg-8 col-md-12 col-sm-12 col-12\">\r\n        <div class=\"card\">\r\n            <div class=\"card-head\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-md-12\">\r\n                        <h5 class=\"card-title data-name\">Últimas Atualizações de Temperatura</h5>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"card-body\">\r\n                <canvas id=\"lastWeekSessionsChart\"></canvas>\r\n            </div>\r\n            <div class=\"card-footer\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12\">\r\n                        <h5 class=\"data-name\">Média de Temperatura </h5>\r\n                        <p>{{ lastUpdateTemperatureAverage || ' -- ' }}&deg;</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n</div> -->"
 
 /***/ }),
 
@@ -1842,6 +1942,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/src/chart.js");
 /* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var src_app_services_entities_enviroments_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/entities/enviroments.service */ "./src/app/services/entities/enviroments.service.ts");
+/* harmony import */ var src_app_services_webksocket_websocket_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/webksocket/websocket.service */ "./src/app/services/webksocket/websocket.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1856,26 +1957,43 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var DashboardComponent = /** @class */ (function () {
-    function DashboardComponent(clientsService, environmentsService) {
+    function DashboardComponent(clientsService, environmentsService, webSocket) {
         this.clientsService = clientsService;
         this.environmentsService = environmentsService;
+        this.webSocket = webSocket;
     }
     DashboardComponent.prototype.ngOnInit = function () {
         this.clientsCounter = this.clientsService.get({ url: 'counter' }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.data; }));
         this.environmentsCounter = this.environmentsService.get({ url: 'counter' }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.data; }));
-        this.lastUpdateChartBuilder();
+        // this.environmentsService.get().subscribe(res => {
+        //     this.lastUpdateLabels = res.data.map(environment => environment.title);
+        //     this.lastUpdateData = res.data.map(environment => {
+        //         if (environment.device.messages[0]) return environment.device.messages[0].temperature;
+        //     });
+        //     let validData = 0;
+        //     let invalidData = 0;
+        //     this.lastUpdateData.forEach((temperature) => {
+        //         if (temperature) validData += temperature;
+        //         else invalidData += 1;
+        //     });
+        //     this.lastUpdateTemperatureAverage = Math.ceil(validData / (this.lastUpdateData.length - invalidData));
+        //     this.lastUpdateChartBuilder();
+        // });
+        // this.webSocket.messageEvent.subscribe(() => {
+        //     window.location.reload();
+        // });
     };
     DashboardComponent.prototype.lastUpdateChartBuilder = function () {
-        this.environmentsService.get({ query: { clientId: 2 } }).subscribe(function (res) { console.log(res); });
         if (this.lastUpdateChart)
             this.lastUpdateChart.destroy();
         this.lastUpdateChart = new chart_js__WEBPACK_IMPORTED_MODULE_3___default.a('lastWeekSessionsChart', {
             type: 'bar',
             data: {
-                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                labels: this.lastUpdateLabels,
                 datasets: [{
-                        data: [12, 19, 3, 5, 2, 3],
+                        data: this.lastUpdateData,
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
                             'rgba(54, 162, 235, 0.2)',
@@ -1919,9 +2037,304 @@ var DashboardComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./dashboard.component.css */ "./src/app/components/pages/dashboard/dashboard.component.css")]
         }),
         __metadata("design:paramtypes", [src_app_services__WEBPACK_IMPORTED_MODULE_0__["ClientsService"],
-            src_app_services_entities_enviroments_service__WEBPACK_IMPORTED_MODULE_4__["EnvironmentsService"]])
+            src_app_services_entities_enviroments_service__WEBPACK_IMPORTED_MODULE_4__["EnvironmentsService"],
+            src_app_services_webksocket_websocket_service__WEBPACK_IMPORTED_MODULE_5__["WebSocketService"]])
     ], DashboardComponent);
     return DashboardComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/components/pages/devices/devices-index.component.ts":
+/*!*********************************************************************!*\
+  !*** ./src/app/components/pages/devices/devices-index.component.ts ***!
+  \*********************************************************************/
+/*! exports provided: DevicesIndexComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DevicesIndexComponent", function() { return DevicesIndexComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var DevicesIndexComponent = /** @class */ (function () {
+    function DevicesIndexComponent() {
+    }
+    DevicesIndexComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-patients',
+            template: '<router-outlet></router-outlet>',
+        })
+    ], DevicesIndexComponent);
+    return DevicesIndexComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/components/pages/devices/devices-list/devices-list.component.css":
+/*!**********************************************************************************!*\
+  !*** ./src/app/components/pages/devices/devices-list/devices-list.component.css ***!
+  \**********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/components/pages/devices/devices-list/devices-list.component.html":
+/*!***********************************************************************************!*\
+  !*** ./src/app/components/pages/devices/devices-list/devices-list.component.html ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"panel\" style=\"padding: 0;\">\r\n\r\n  <div class=\"panel-body\" style=\"padding: 0 20px 15px 20px;\">\r\n\r\n    <div class=\"table-wrapper\" style=\"margin: 20px 0 0 0\">\r\n\r\n\r\n      <div class=\"tableStyles\">\r\n\r\n\r\n        <table class=\"table align-items-center table-flush table-responsive-sm\">\r\n          <thead class=\"thead-light\">\r\n            <th *ngFor=\"let tableHead of tableHeaders\">\r\n\r\n              <a *ngIf=\"tableHead.sortable; else noSort\" class=\"pointer\" (click)=\"changeSort(tableHead)\">\r\n                {{tableHead.title}}\r\n                <i class=\"fa\"\r\n                  [ngClass]=\"{'fa-caret-up': tableHead.sorted === 'asc', 'fa-caret-down': tableHead.sorted === 'desc'}\"></i>\r\n              </a>\r\n              <ng-template #noSort>\r\n                {{tableHead.title}}\r\n              </ng-template>\r\n\r\n            </th>\r\n            <th></th>\r\n          </thead>\r\n          <tbody *ngIf=\"tableData\">\r\n\r\n            <tr *ngFor=\"let device of tableData\" class=\"line\">\r\n              <td>\r\n                {{ device.id }}\r\n              </td>\r\n              <td>\r\n                <button class=\"btn btn-info btn-sm\"\r\n                  routerLink=\"../../clients/show/{{device.environment.clientId}}\">{{ device.environment.clientId }}</button>\r\n              </td>\r\n              <td>\r\n                {{device.environment.title }}\r\n              </td>\r\n              <td>\r\n                {{ device.createdAt | date:'dd/MM/yyyy'}}\r\n              </td>\r\n              <td>\r\n                <button \r\n                [disabled]=\"device.messages?.length <= 0\" \r\n                class=\"btn btn-sm btn-success\"\r\n                (click)=\"device.show_messages = !device.show_messages\"\r\n                [title]=\"device.messages?.length <= 0 ? 'Nenhuma mensagem registrada nesse dispositivo' : 'Abrir histórico de mensagens'\">\r\n                  <i class=\"fa fa-search\"></i>\r\n                </button>\r\n              </td>\r\n\r\n              <app-devices-messages *ngIf=\"device.show_messages\" [deviceId]=\"device.id\" (closeModal)=\"device.show_messages = false\"></app-devices-messages>\r\n            </tr>\r\n\r\n          </tbody>\r\n\r\n          <tbody *ngIf=\"!tableData || tableData.length <= 0\">\r\n            <tr>\r\n              <td colspan=\"5\" style=\"text-align: center\">NENHUM DISPOSITIVO CADASTRADO</td>\r\n            </tr>\r\n          </tbody>\r\n\r\n        </table>\r\n\r\n\r\n      </div>\r\n\r\n      <div class=\"row tablePagination\">\r\n\r\n        <div class=\"input-group col-xl-2 col-lg-4 col-md-4 col-sm-6 col-12 mb-3\">\r\n          <div class=\"input-group-prepend\">\r\n            <label class=\"input-group-text\" for=\"list-limit\">Limite</label>\r\n          </div>\r\n          <select id=\"list-limit\" [(ngModel)]=\"selectedSize\" (change)=\"limitChange(selectedSize)\" class=\"custom-select\">\r\n            <option *ngFor=\"let pageSize of pageSizeOptions\" [value]=\"pageSize\">{{pageSize}}</option>\r\n          </select>\r\n        </div>\r\n\r\n        <div class=\"btn-group col-xl-4 col-lg-8 col-md-8 col-sm-12 col-12\" role=\"group\">\r\n\r\n          <button type=\"button\" [disabled]=\"!tableMetaData || tableMetaData?.paginationConfig.current_page === 1\"\r\n            class=\"btn btn-outline\" (click)=\"paginationChange(tableMetaData?.paginationConfig.current_page - 1)\">\r\n            <i class=\"fa fa-angle-left\"></i>\r\n          </button>\r\n\r\n          <button type=\"button\" class=\"btn btn-primary\">{{ tableMetaData?.paginationConfig.current_page || 1}}</button>\r\n\r\n          <button type=\"button\"\r\n            [disabled]=\"tableMetaData?.paginationConfig.current_page === tableMetaData?.paginationConfig.total_pages\"\r\n            class=\"btn btn-outline\" (click)=\"paginationChange(tableMetaData?.paginationConfig.current_page + 1)\">\r\n            <i class=\"fa fa-angle-right\"></i>\r\n          </button>\r\n\r\n        </div>\r\n\r\n      </div>\r\n\r\n    </div>\r\n\r\n\r\n  </div>\r\n\r\n\r\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/components/pages/devices/devices-list/devices-list.component.ts":
+/*!*********************************************************************************!*\
+  !*** ./src/app/components/pages/devices/devices-list/devices-list.component.ts ***!
+  \*********************************************************************************/
+/*! exports provided: DevicesListComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DevicesListComponent", function() { return DevicesListComponent; });
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var src_app_services__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/services */ "./src/app/services/index.ts");
+/* harmony import */ var src_app_utils_crud_filter_criteria__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/utils/crud/filter-criteria */ "./src/app/utils/crud/filter-criteria.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var src_app_utils_crud_list_components_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/utils/crud/list-components.utils */ "./src/app/utils/crud/list-components.utils.ts");
+/* harmony import */ var src_app_utils_animations_animations__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/utils/animations/animations */ "./src/app/utils/animations/animations.ts");
+/* harmony import */ var src_app_services_entities_devices_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/services/entities/devices.service */ "./src/app/services/entities/devices.service.ts");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+var DevicesListComponent = /** @class */ (function (_super) {
+    __extends(DevicesListComponent, _super);
+    function DevicesListComponent(devicesService, shareData, router, fb) {
+        var _this = _super.call(this) || this;
+        _this.devicesService = devicesService;
+        _this.shareData = shareData;
+        _this.router = router;
+        _this.fb = fb;
+        _this.tableHeaders = [
+            { title: 'Dispositivo', value: 'device', sortable: false },
+            { title: 'Cliente', value: 'client', sortable: false },
+            { title: 'Ambiente', value: 'environment', sortable: false },
+            { title: 'Criado', value: 'created_at', sortable: false }
+        ];
+        _this.filterCriteria = new src_app_utils_crud_filter_criteria__WEBPACK_IMPORTED_MODULE_2__["FilterCriteria"]();
+        _this.resource = _this.devicesService;
+        _this.shareDataService = _this.shareData;
+        _this.urlOptions = 'paginated';
+        return _this;
+    }
+    DevicesListComponent.prototype.ngOnInit = function () {
+        this.filterForm = this.fb.group({
+            search: [''],
+            health_insurance: ['']
+        });
+        this.filterCriteria.addListParams();
+        this.loadData();
+    };
+    DevicesListComponent.prototype.submitFilters = function () {
+        var controls = this.filterForm.controls;
+        var countFilters = 0;
+        if (controls.health_insurance.value) {
+            this.filterCriteria.addParam('health_insurance', this.filterForm.controls.health_insurance.value);
+            countFilters += 1;
+        }
+        else {
+            this.filterCriteria.removeParam('health_insurance');
+        }
+        if (controls.search.value) {
+            this.filterCriteria.addParam('search', this.filterForm.controls.search.value);
+            countFilters += 1;
+        }
+        else {
+            this.filterCriteria.removeParam('search');
+        }
+        if (countFilters > 0)
+            this.clearFiltersBtn = true;
+        else
+            this.clearFiltersBtn = false;
+        this.loadData();
+    };
+    DevicesListComponent.prototype.clearFilters = function () {
+        this.filterCriteria.clearParams();
+        this.filterCriteria.addListParams();
+        this.filterForm.reset();
+        this.clearFiltersBtn = false;
+        this.loadData();
+    };
+    /**
+     * Direciona para a rota de detalhes do paciente
+     * @param id (number)
+     */
+    DevicesListComponent.prototype.show = function (id) {
+        this.router.navigate(["home/clients/show/" + id]);
+    };
+    /**
+     * Exclui um paciente
+     * @param id (number)
+     */
+    DevicesListComponent.prototype.delete = function (id) {
+        var _this = this;
+        this.devicesService.delete(id).subscribe(function () {
+            _this.loadData();
+        });
+    };
+    DevicesListComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+            selector: 'app-test',
+            template: __webpack_require__(/*! ./devices-list.component.html */ "./src/app/components/pages/devices/devices-list/devices-list.component.html"),
+            styles: [__webpack_require__(/*! ./devices-list.component.css */ "./src/app/components/pages/devices/devices-list/devices-list.component.css")],
+            animations: [src_app_utils_animations_animations__WEBPACK_IMPORTED_MODULE_6__["collapse"]]
+        }),
+        __metadata("design:paramtypes", [src_app_services_entities_devices_service__WEBPACK_IMPORTED_MODULE_7__["DevicesService"],
+            src_app_services__WEBPACK_IMPORTED_MODULE_1__["ShareDataService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormBuilder"]])
+    ], DevicesListComponent);
+    return DevicesListComponent;
+}(src_app_utils_crud_list_components_utils__WEBPACK_IMPORTED_MODULE_5__["ListComponent"]));
+
+
+
+/***/ }),
+
+/***/ "./src/app/components/pages/devices/devices-messages/devices-messages.component.css":
+/*!******************************************************************************************!*\
+  !*** ./src/app/components/pages/devices/devices-messages/devices-messages.component.css ***!
+  \******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".details-modal {\r\n    height: auto;\r\n    min-height: 100%;\r\n    background: var(--main-color);\r\n    width: 50%;\r\n    border-radius: 12px;\r\n    box-shadow: var(--box-shadow);\r\n    position: absolute;\r\n    -webkit-animation: showup .5s;\r\n            animation: showup .5s;\r\n    top: 50px;\r\n    margin-bottom: 30px;\r\n    overflow-x: hidden;\r\n}\r\n\r\n.modal-head {\r\n    padding: 10px;\r\n    border-radius: 12px 12px 0 0;\r\n    background-color: rgba(0,0,0,.03);\r\n    border-bottom: 1px solid rgba(0,0,0,.125);\r\n    text-align: center;\r\n}\r\n\r\n.modal-title {\r\n    border: none!important;\r\n    color: var(--font-subcolor)!important;\r\n    font-weight: 700!important;\r\n    font-size: 1rem;\r\n    letter-spacing: 1px;\r\n    text-transform: uppercase;\r\n}\r\n\r\n.modal-body {\r\n    border-radius: 0 0 12px 12px;\r\n    padding: 20px 20px 55px 20px;\r\n    background: var(--lighter-color)!important;\r\n}\r\n\r\n.modal-body p {\r\n    word-break: break-all;\r\n}\r\n\r\n.footer p,\r\n.footer strong {\r\n    font-size: 0.75rem;\r\n}\r\n\r\nul li {\r\n    display: inline;\r\n    list-style: none;\r\n    margin-right: 5px;\r\n}\r\n\r\n.close-btn {\r\n    float: right;\r\n}\r\n\r\n@media only screen and (max-width: 1000px) {\r\n\r\n    .details-modal {\r\n        width: 80%;\r\n    }\r\n}\r\n\r\n@media only screen and (max-width: 516px) {\r\n    .close-btn {\r\n        float: none;\r\n    }\r\n}\r\n\r\n@-webkit-keyframes showup {\r\n    from {\r\n        opacity: 0;\r\n    }\r\n    to {\r\n        opacity: 1;\r\n    }\r\n}\r\n\r\n@keyframes showup {\r\n    from {\r\n        opacity: 0;\r\n    }\r\n    to {\r\n        opacity: 1;\r\n    }\r\n}"
+
+/***/ }),
+
+/***/ "./src/app/components/pages/devices/devices-messages/devices-messages.component.html":
+/*!*******************************************************************************************!*\
+  !*** ./src/app/components/pages/devices/devices-messages/devices-messages.component.html ***!
+  \*******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div appModal>\r\n\r\n  <div class=\"details-modal\">\r\n\r\n    <div class=\"modal-head\">\r\n      <h4 class=\"modal-title\">\r\n        Histórico de Mensagem\r\n        <button (click)=\"close()\" class=\"close-btn btn btn-primary btn-sm\"><i class=\"fa fa-times\"></i></button>\r\n      </h4>\r\n    </div>\r\n\r\n    <div class=\"modal-body\">\r\n\r\n\r\n      <div id=\"container\" [@listObjShow]=\"messages.length\">\r\n\r\n        <div *ngFor=\"let device of messages; let index = index\">\r\n          <app-message-card [device]=\"device\">\r\n          </app-message-card>\r\n        </div>\r\n\r\n      </div>\r\n\r\n    </div>\r\n\r\n\r\n  </div>\r\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/components/pages/devices/devices-messages/devices-messages.component.ts":
+/*!*****************************************************************************************!*\
+  !*** ./src/app/components/pages/devices/devices-messages/devices-messages.component.ts ***!
+  \*****************************************************************************************/
+/*! exports provided: DevicesMessagesComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DevicesMessagesComponent", function() { return DevicesMessagesComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var src_app_utils_animations_animations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/utils/animations/animations */ "./src/app/utils/animations/animations.ts");
+/* harmony import */ var src_app_services_webksocket_websocket_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/webksocket/websocket.service */ "./src/app/services/webksocket/websocket.service.ts");
+/* harmony import */ var src_app_services_entities_messages_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/entities/messages.service */ "./src/app/services/entities/messages.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var DevicesMessagesComponent = /** @class */ (function () {
+    function DevicesMessagesComponent(webSocket, messagesService) {
+        this.webSocket = webSocket;
+        this.messagesService = messagesService;
+        this.closeModal = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.messages = [];
+    }
+    DevicesMessagesComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.messagesService.get({ id: this.deviceId, url: 'devices' }).subscribe(function (res) {
+            _this.messages = res.data;
+        });
+        this.webSocket.messageEvent.subscribe(function (message) {
+            if (_this.deviceId === message.deviceId) {
+                _this.messages.unshift(message);
+            }
+            ;
+        });
+    };
+    DevicesMessagesComponent.prototype.close = function () {
+        this.closeModal.emit(false);
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Number)
+    ], DevicesMessagesComponent.prototype, "deviceId", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", Object)
+    ], DevicesMessagesComponent.prototype, "closeModal", void 0);
+    DevicesMessagesComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-devices-messages',
+            template: __webpack_require__(/*! ./devices-messages.component.html */ "./src/app/components/pages/devices/devices-messages/devices-messages.component.html"),
+            styles: [__webpack_require__(/*! ./devices-messages.component.css */ "./src/app/components/pages/devices/devices-messages/devices-messages.component.css")],
+            animations: [src_app_utils_animations_animations__WEBPACK_IMPORTED_MODULE_1__["listObjShow"]]
+        }),
+        __metadata("design:paramtypes", [src_app_services_webksocket_websocket_service__WEBPACK_IMPORTED_MODULE_2__["WebSocketService"],
+            src_app_services_entities_messages_service__WEBPACK_IMPORTED_MODULE_3__["MessagesService"]])
+    ], DevicesMessagesComponent);
+    return DevicesMessagesComponent;
 }());
 
 
@@ -2043,7 +2456,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ROUTES", function() { return ROUTES; });
 var ROUTES = [
     { path: '/home/dashboard', id: 'dashboard', title: 'Dashboard', icon: 'fa fa-tachometer', children: null },
-    { path: '/home/clients', id: 'clients', title: 'Clientes', icon: 'fa fa-user', children: null },
+    { path: '/home/clients', id: 'clients', title: 'Clientes', icon: 'fa fa-users', children: null },
+    { path: '/home/devices', id: 'devices', title: 'Dispositivos', icon: 'fa fa-thermometer-quarter', children: null },
 ];
 
 
@@ -2056,7 +2470,7 @@ var ROUTES = [
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".title {\r\n  text-align: center;\r\n  background: white;\r\n  padding: 10px 8px 10px 8px;\r\n  margin-bottom: 15px;\r\n  box-shadow: 0px -2px 30px 3px rgba(0,0,0,.75);\r\n}\r\n.title-logo {\r\n  width: 80%;\r\n  display: linear;\r\n}\r\n.title h3 {\r\n  margin-bottom: 0;\r\n  font-weight: 700!important;\r\n  font-size: 22px;\r\n  line-height: 39px;\r\n  letter-spacing: 1px;\r\n  text-transform: uppercase;\r\n}\r\nul > li {\r\n  list-style: none;\r\n}\r\nhr {\r\n  background-color: #303844;\r\n}\r\n.username{\r\n  padding-top: 15px;\r\n  font-size: 18px;\r\n  text-align: center;\r\n  position: relative;\r\n  font-weight: 100;\r\n  color: white;\r\n}\r\n.nav-container{position: relative;}\r\n.nav{padding-top: 10px;width: 200px;}\r\n.nav li{width:inherit}\r\n.nav li a{\r\n  display: flex;\r\n  align-items: center;\r\n\r\n  \r\n  height: 50px;\r\n  text-decoration: none;\r\n  width: 100%;\r\n  transition: all 400ms;\r\n\r\n}\r\n.nav li a:hover,  .parent-active{\r\n  background-color: rgba(255, 255, 255, 0.185);\r\n}\r\n.nav li a span{\r\n  margin-left: 20px;\r\n}\r\n.selected{\r\n  color: white!important;\r\n  border-left: 5px solid #007DF9;\r\n  transition: none;\r\n}\r\n.subMenu {\r\n  padding: 0;\r\n  overflow: hidden; \r\n  background: var(--lighter-color);\r\n  box-shadow: inset 0 8px 10px -9px rgba(0, 0, 0, 0.42);\r\n}\r\n.subMenu-arrow {\r\n  right: 5px;\r\n  position: absolute;\r\n  padding: 15px;\r\n  transition: -webkit-transform .4s;\r\n  transition: transform .4s;\r\n  transition: transform .4s, -webkit-transform .4s\r\n}\r\n.subMenu-open {\r\n  -webkit-transform: rotate(90deg);\r\n          transform: rotate(90deg);\r\n}"
+module.exports = ".title {\r\n  text-align: center;\r\n  background: white;\r\n  padding: 10px 8px 10px 8px;\r\n  margin-bottom: 15px;\r\n  box-shadow: 0px -2px 30px 3px rgba(0,0,0,.75);\r\n}\r\n.title-logo {\r\n  width: 80%;\r\n  display: linear;\r\n}\r\n.title h3 {\r\n  margin-bottom: 0;\r\n  font-weight: 700!important;\r\n  font-size: 22px;\r\n  line-height: 39px;\r\n  letter-spacing: 1px;\r\n  text-transform: uppercase;\r\n}\r\nul > li {\r\n  list-style: none;\r\n}\r\nhr {\r\n  background-color: #303844;\r\n}\r\n.username{\r\n  padding-top: 15px;\r\n  font-size: 18px;\r\n  text-align: center;\r\n  position: relative;\r\n  font-weight: 100;\r\n  color: white;\r\n}\r\n.nav-container{position: relative;}\r\n.nav{padding-top: 10px;width: 200px;}\r\n.nav li{width:inherit}\r\n.nav li a{\r\n  display: flex;\r\n  align-items: center;\r\n\r\n  \r\n  height: 50px;\r\n  text-decoration: none;\r\n  width: 100%;\r\n  transition: all 400ms;\r\n\r\n}\r\n.nav li a:hover,  .parent-active{\r\n  background-color: rgba(255, 255, 255, 0.185);\r\n}\r\n.nav li a span{\r\n  margin-left: 20px;\r\n}\r\n.selected{\r\n  background-color: rgba(255, 255, 255, 0.185);\r\n\r\n  color: white!important;\r\n  border-left: 5px solid var(--success-color);\r\n  transition: none;\r\n}\r\n.subMenu {\r\n  padding: 0;\r\n  overflow: hidden; \r\n  background: var(--lighter-color);\r\n  box-shadow: inset 0 8px 10px -9px rgba(0, 0, 0, 0.42);\r\n}\r\n.subMenu-arrow {\r\n  right: 5px;\r\n  position: absolute;\r\n  padding: 15px;\r\n  transition: -webkit-transform .4s;\r\n  transition: transform .4s;\r\n  transition: transform .4s, -webkit-transform .4s\r\n}\r\n.subMenu-open {\r\n  -webkit-transform: rotate(90deg);\r\n          transform: rotate(90deg);\r\n}"
 
 /***/ }),
 
@@ -2187,6 +2601,7 @@ var LoginComponent = /** @class */ (function () {
         this.formValidatorErrors = formValidatorErrors;
         this.toastService = toastService;
         this.currentYear = new Date();
+        this.route.config[0].children[0].redirectTo = 'login';
         if (this.authService.isLoggedIn()) {
             this.route.navigate(['home']);
             return;
@@ -2264,7 +2679,7 @@ module.exports = ".card{\r\n    border: none!important;\r\n    background-color:
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\" changeBackground>\n\n  <div class=\"card-body\">\n\n    <div class=\"card-title\">\n      <img src=\"../../../assets/img/salvus-logo.PNG\" alt=\"\">\n    </div>\n\n    <form [formGroup]=\"registerForm\" (submit)=\"register()\">\n\n      <div class=\"form-group\">\n\n        <input class=\"form-control form-control-lg\" type=\"text\" placeholder=\"Nome\" name=\"email\" formControlName=\"name\"\n          autocomplete=\"off\" autofocus>\n\n        <input class=\"form-control form-control-lg\" type=\"text\" placeholder=\"Email\" name=\"email\" formControlName=\"email\"\n          autocomplete=\"off\" autofocus>\n\n        <input class=\"form-control form-control-lg\" type=\"password\" placeholder=\"Senha\" name=\"password\"\n          formControlName=\"password\" autocomplete=\"off\">\n\n        <input class=\"form-control form-control-lg\" type=\"password\" placeholder=\"Confirmar Senha\" name=\"confirm_password\"\n          formControlName=\"confirm_password\" autocomplete=\"off\">\n\n\n        <button type=\"submit\" [disabled]=\"loadingLogin\" class=\"btn btn-primary btn-lg btn-block\">\n          {{ buttonRegister }}\n          <i [hidden]=\"!registering\" class=\"fa fa-spinner fa-spin\"></i>\n        </button>\n\n        <button type=\"button\" (click)=\"goToLogin()\" class=\"btn btn-outline btn-lg btn-block\">\n          Voltar\n        </button>\n      </div>\n\n    </form>\n    <small>{{ currentYear | date:'yyyy' }} © Umberto</small>\n  </div>\n</div>"
+module.exports = "<div class=\"card\" changeBackground>\r\n\r\n  <div class=\"card-body\">\r\n\r\n    <div class=\"card-title\">\r\n      <img src=\"../../../assets/img/salvus-logo.PNG\" alt=\"\">\r\n    </div>\r\n\r\n\r\n    <div class=\"form-group\">\r\n      <form [formGroup]=\"registerForm\" (submit)=\"register()\">\r\n\r\n        <input class=\"form-control form-control-lg\" type=\"text\" placeholder=\"Nome\" name=\"email\" formControlName=\"name\"\r\n          autocomplete=\"off\" autofocus>\r\n\r\n        <input class=\"form-control form-control-lg\" type=\"text\" placeholder=\"Email\" name=\"email\" formControlName=\"email\"\r\n          autocomplete=\"off\" autofocus>\r\n\r\n        <input class=\"form-control form-control-lg\" type=\"password\" placeholder=\"Senha\" name=\"password\"\r\n          formControlName=\"password\" autocomplete=\"off\">\r\n\r\n        <input class=\"form-control form-control-lg\" type=\"password\" placeholder=\"Confirmar Senha\"\r\n          name=\"confirm_password\" formControlName=\"confirm_password\" autocomplete=\"off\">\r\n\r\n\r\n        <button type=\"submit\" [disabled]=\"loadingLogin\" class=\"btn btn-primary btn-lg btn-block\">\r\n          {{ buttonRegister }}\r\n          <i [hidden]=\"!registering\" class=\"fa fa-spinner fa-spin\"></i>\r\n        </button>\r\n\r\n\r\n      </form>\r\n      <button type=\"button\" (click)=\"goToLogin()\" class=\"btn btn-outline btn-lg btn-block\">\r\n          Voltar\r\n      </button>\r\n    </div>\r\n\r\n    <small>{{ currentYear | date:'yyyy' }} © Umberto</small>\r\n  </div>"
 
 /***/ }),
 
@@ -2304,6 +2719,7 @@ var RegisterComponent = /** @class */ (function () {
         this.authService = authService;
         this.formValidatorErrors = formValidatorErrors;
         this.currentYear = new Date();
+        this.route.config[0].children[0].redirectTo = 'register';
         if (this.authService.isLoggedIn()) {
             this.route.navigate(['home']);
             return;
@@ -2335,9 +2751,8 @@ var RegisterComponent = /** @class */ (function () {
             this.authService.registerUser(registerData)
                 .subscribe(function () {
                 _this.registering = false;
-                _this.route.navigate(['./login']);
+                _this.goToLogin();
             }, function () {
-                _this.route.navigate(['./register']);
                 _this.registering = false;
                 _this.buttonRegister = 'Cadastrar';
             });
@@ -2708,7 +3123,6 @@ var AuthService = /** @class */ (function () {
     AuthService.prototype.createTokenData = function (token) {
         Object(src_app_utils_app_utils__WEBPACK_IMPORTED_MODULE_0__["eraseCookie"])('auth_token');
         var objToken = JSON.parse(token);
-        console.log(objToken);
         var expires = (typeof objToken === 'object') ? objToken.token.expires_in : 21600;
         document.cookie = "auth_token=" + token + ";Max-Age=" + expires;
     };
@@ -2828,6 +3242,65 @@ var ClientsService = /** @class */ (function (_super) {
         __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
     ], ClientsService);
     return ClientsService;
+}(src_app_utils_crud_crud_methods__WEBPACK_IMPORTED_MODULE_2__["CrudMethods"]));
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/entities/devices.service.ts":
+/*!******************************************************!*\
+  !*** ./src/app/services/entities/devices.service.ts ***!
+  \******************************************************/
+/*! exports provided: DevicesService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DevicesService", function() { return DevicesService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var src_app_utils_crud_crud_methods__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/utils/crud/crud-methods */ "./src/app/utils/crud/crud-methods.ts");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var DevicesService = /** @class */ (function (_super) {
+    __extends(DevicesService, _super);
+    function DevicesService(http) {
+        var _this = _super.call(this) || this;
+        _this.http = http;
+        _this.entity = 'devices';
+        return _this;
+    }
+    DevicesService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+    ], DevicesService);
+    return DevicesService;
 }(src_app_utils_crud_crud_methods__WEBPACK_IMPORTED_MODULE_2__["CrudMethods"]));
 
 
@@ -3154,6 +3627,7 @@ var EventHandler = /** @class */ (function () {
    * @param {any} event
    */
     EventHandler.prototype.handleValidationEvent = function (event) {
+        console.log(event);
         this.toastService.show({ text: event.msg || 'Erro de Validação', type: 'warning' });
     };
     /**
@@ -3785,7 +4259,7 @@ var ListComponent = /** @class */ (function () {
     ListComponent.prototype.loadData = function () {
         var _this = this;
         this.shareDataService.activateLoadingScreen(true);
-        return this.resource[this.resourceFunction ? this.resourceFunction : 'get']({ query: this.filterCriteria ? this.filterCriteria.params : {} }).subscribe(function (res) {
+        return this.resource[this.resourceFunction ? this.resourceFunction : 'get']({ url: this.urlOptions || '', query: this.filterCriteria ? this.filterCriteria.params : {} }).subscribe(function (res) {
             if (res.data)
                 _this.tableData = res.data;
             if (res.meta)
@@ -3888,21 +4362,24 @@ var FormValidatorErrors = /** @class */ (function () {
     FormValidatorErrors.prototype.validationMessages = function (key, error) {
         switch (error) {
             case 'required': return "O campo '" + this.fieldTranslate(key) + "' \u00E9 obrigat\u00F3rio.";
-            case 'nameValidator': return "Digite um " + this.fieldTranslate(key) + " v\u00E1lido.";
-            case 'emailValidator': return "Digite um " + this.fieldTranslate(key) + " v\u00E1lido.";
+            case 'name': return "Digite um " + this.fieldTranslate(key) + " v\u00E1lido.";
+            case 'email': return "Digite um " + this.fieldTranslate(key) + " v\u00E1lido.";
         }
     };
     FormValidatorErrors.prototype.fieldTranslate = function (field) {
         switch (field) {
             case 'name': return 'nome';
+            case 'title': return 'nome';
             case 'email': return 'email';
             case 'password': return 'senha';
+            case 'confirm_password': return 'confirmar senha';
             case 'street': return 'rua';
             case 'number': return 'número';
             case 'zip_code': return 'CEP';
             case 'district': return 'distrito';
             case 'city': return 'cidade';
             case 'phone': return 'celular';
+            case 'update_time': return 'taxa de atualização';
         }
     };
     FormValidatorErrors = __decorate([
@@ -3922,7 +4399,7 @@ var FormValidatorErrors = /** @class */ (function () {
 /*!************************************************!*\
   !*** ./src/app/utils/validators/validators.ts ***!
   \************************************************/
-/*! exports provided: PasswordValidation, emailValidator, nameValidator */
+/*! exports provided: PasswordValidation, emailValidator, nameValidator, updateTimeValidator */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3930,6 +4407,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PasswordValidation", function() { return PasswordValidation; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "emailValidator", function() { return emailValidator; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "nameValidator", function() { return nameValidator; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateTimeValidator", function() { return updateTimeValidator; });
 /* harmony import */ var src_app_utils_app_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/app/utils/app.utils */ "./src/app/utils/app.utils.ts");
 
 var PasswordValidation = /** @class */ (function () {
@@ -3959,6 +4437,17 @@ function emailValidator(control) {
 }
 function nameValidator(control) {
     return validName(control.value) ? null : { 'nameValidator': true };
+}
+function updateTimeValidator(control) {
+    setTimeout(function () {
+        if (control.value > 30) {
+            control.setValue(30);
+        }
+        else if (control.value < 5) {
+            control.setValue(5);
+        }
+    }, 800);
+    return control.value < 30 && control.value > 5 ? Promise.resolve(true) : Promise.resolve(false);
 }
 
 
@@ -4035,7 +4524,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\umber\Desktop\salvus-dashboard\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! c:\Users\umber\Desktop\salvus-dashboard\src\main.ts */"./src/main.ts");
 
 
 /***/ }),
