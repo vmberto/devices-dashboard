@@ -10,11 +10,12 @@ export class WebSocketService {
     private socket;
     private url = environment.API_URL;
 
-    public signalEvent = new Subject<any>();
+    public activatedDevicesEvent = new Subject<any>();
 
     public messageEvent = new Subject<any>();
 
-    public environmentEmitter = new Subject<any>();
+    public newEnvironmentEmitter = new Subject<any>();
+    public deletedEnvironmentEmitter = new Subject<any>();
 
     constructor() {
 
@@ -30,12 +31,15 @@ export class WebSocketService {
 
     private emittedEvents() {
 
-        this.environmentEmitter
-            .subscribe(
-                environment => {
-                    this.socket.emit('new-environment', environment);
-                });
+        this.newEnvironmentEmitter.subscribe(
+            environment => {
+                this.socket.emit('new-environment', environment);
+            });
 
+        this.deletedEnvironmentEmitter.subscribe(
+            environment => {
+                this.socket.emit('deleted-environment', environment);
+            });
 
     }
 
@@ -44,11 +48,6 @@ export class WebSocketService {
         this.socket.on('update-dashboard', (message: any) => {
             this.messageEvent.next(message);
         });
-
-        this.socket.on('devices-status', (signal) => {
-            this.signalEvent.next(signal)
-        });
-
 
 
     }

@@ -36,11 +36,14 @@ export class EventHandler {
 
     if (typeof Object.keys(event.body)[0] === 'string' && Object.keys(event.body)[0].substr(0, 3) === 'new') {
       this.toastService.show({ text: 'Criado com sucesso!', type: 'success' });
-    } else if (event.body.error && event.body.msg) {
+
+    } else if (typeof Object.keys(event.body)[0] === 'string' && Object.keys(event.body)[0].substr(0, 7) === 'deleted') {
+      this.toastService.show({ text: 'Excluído com sucesso!', type: 'success' });
+
+    }  else if (event.body.error && event.body.msg) {
       this.toastService.show({ text: event.body.msg, type: 'warning' });
-    } else if (event.body instanceof Blob) {
-      this.toastService.show({ text: 'Download com sucesso!', type: 'success'})
-    }
+
+    } 
     
 
   }

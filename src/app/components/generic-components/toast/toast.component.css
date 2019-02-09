@@ -8,7 +8,7 @@
     width: auto;
     word-wrap: none;
     overflow: hidden;
-    background: var(--darker-color);
+    background: var(--main-color);
     box-shadow: var(--box-shadow);
     cursor: pointer;
     transition: all .3s;

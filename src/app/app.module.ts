@@ -9,7 +9,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Ng2OdometerModule } from 'ng2-odometer';
 
-
 import { TokenInterceptor, AuthGuardService } from './services';
 
 import { WordWrapPipe } from './pipes/word-wrap.pipe';

@@ -39,26 +39,10 @@ export class ClientEnvironmentsComponent implements OnInit {
 
   ngOnInit() {
 
-    this.webSocket.signalEvent.subscribe(signal => {
-      
-      const environmentFound = this.environments.find((environment) => {
-
-        return environment.id === signal.deviceId;
-
-      });
-
-      if (environmentFound && signal.status) environmentFound.status += 1;
-      else if (environmentFound && !signal.status) environmentFound.status === 0 ? environmentFound.status = 0 : environmentFound.status -= 1;
-
-    });
-
-
     this.environmentForm = this.fb.group({
       title: ['', [Validators.required]],
       update_time: ['', [Validators.required]]
     });
-
-
 
   }
 
@@ -86,19 +70,29 @@ export class ClientEnvironmentsComponent implements OnInit {
             this.creatingEnvironment = false;
             this.createEnvironmentToggle = false;
 
-            this.webSocket.environmentEmitter.next(res.new_environment);
+            this.webSocket.newEnvironmentEmitter.next(res.new_environment);
 
 
           },
-          err => {
+          () => {
             this.creatingEnvironment = false;
-            console.log(err);
-
           }
         );
 
-
     };
+
+  }
+
+  public deleteEnvironment(environment: any): void {
+
+    this.environmentsService.delete(environment.id).subscribe(
+      res => {
+
+        this.environments.splice(this.environments.indexOf(environment), 1);
+
+        this.webSocket.deletedEnvironmentEmitter.next(res.deleted_environment);
+
+      });
 
   }
 

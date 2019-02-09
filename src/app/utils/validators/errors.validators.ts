@@ -49,20 +49,12 @@ export class FormValidatorErrors {
 
         switch (field) {
             case 'name': return `nome`;
-            case 'email': return `email`;
-            case 'childrens_number': return `número de filhos`;
             case 'street': return `rua`;
             case 'number': return `número`;
             case 'zip_code': return `CEP`;
             case 'district': return `distrito`;
             case 'city': return `cidade`;
-            case 'birthday': return `data de nascimento`;
-            case 'phone': return `fone`;
-            case 'union_time': return `tempo de união`;
-            case 'humour': return `humor`;
-            case 'attendance_at': return `atendimento`;
-            case 'duration': return `duração`;
-            case 'description': return `descrição`;
+            case 'phone': return `celular`;
         }
     }
 

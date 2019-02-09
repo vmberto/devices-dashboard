@@ -69,9 +69,7 @@
                 Dispositivo {{ environment.deviceId }}
               </td>
               <td>
-                <span [ngClass]="{'text-danger': environment.status === 0, 'text-success': environment.status > 0}">
-                  Status
-                </span>
+                <button (click)="deleteEnvironment(environment)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
               </td>
             </tr>
 
@@ -87,27 +85,6 @@
 
 
       </div>
-<!-- 
-      <div class="row tablePagination">
-
-        <div class="btn-group col-xl-4 col-lg-8 col-md-8 col-sm-12 col-12" role="group">
-
-          <button type="button" [disabled]="!tableMetaData || tableMetaData?.paginationConfig.current_page === 1"
-            class="btn btn-outline" (click)="paginationChange(tableMetaData?.paginationConfig.current_page - 1)">
-            <i class="fa fa-angle-left"></i>
-          </button>
-
-          <button type="button" class="btn btn-primary">{{ tableMetaData?.paginationConfig.current_page || 1}}</button>
-
-          <button type="button"
-            [disabled]="tableMetaData?.paginationConfig.current_page === tableMetaData?.paginationConfig.total_pages"
-            class="btn btn-outline" (click)="paginationChange(tableMetaData?.paginationConfig.current_page + 1)">
-            <i class="fa fa-angle-right"></i>
-          </button>
-
-        </div>
-
-      </div> -->
 
     </div>
 
