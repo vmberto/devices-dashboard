@@ -1,0 +1,37 @@
+.pointer {
+    cursor: pointer;
+}
+
+.data-title-label {
+  border: none!important;
+  font-weight: 600!important;
+  font-size: .65rem;
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.data-name,
+.data-name-address {
+    border: none!important;
+    font-weight: 600!important;
+    font-size: 1rem;
+    padding-top: .75rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+
+@media only screen and (max-width: 468px) {
+    .full-width-mobile {
+      width: 100%;
+    }
+  }
+
+
+.btn-selected {
+  color: var(--font-color);
+  background: var(--primary-selected);
+  border-color: var(--primary-selected);
+}
