@@ -46,36 +46,37 @@ export class RegisterComponent implements OnInit {
   }
 
   public register(): void {
-    // this.formValidatorErrors.getFormValidationErrors(this.registerForm);
+    this.formValidatorErrors.getFormValidationErrors(this.registerForm);
 
-    // if (this.registerForm.valid) {
+    if (this.registerForm.valid) {
 
-    //   const formControls = this.registerForm.controls;
 
-    //   const registerData = {
-    //     name: formControls.name.value,
-    //     email: formControls.email.value,
-    //     password: formControls.password.value,
-    //     confirm_password: formControls.confirm_password.value
-    //   }
+      const formControls = this.registerForm.controls;
 
-    //   this.registering = true;
-    //   this.buttonRegister = 'Cadastrando';
+      const registerData = {
+        name: formControls.name.value,
+        email: formControls.email.value,
+        password: formControls.password.value,
+        confirm_password: formControls.confirm_password.value
+      }
 
-      this.authService.registerUser(1)
+      this.registering = true;
+      this.buttonRegister = 'Cadastrando';
+
+      this.authService.registerUser(registerData)
         .subscribe(
           () => {
 
             this.registering = false;
 
+            this.route.navigate(['./login']);
           },
           () => {
-            
+            this.route.navigate(['./register']);
             this.registering = false;
             this.buttonRegister = 'Cadastrar';
-
           });
-    // }
+    }
   }
 
   public goToLogin(): void {
