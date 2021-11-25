@@ -48,11 +48,7 @@ export class ClientMessagesComponent implements OnInit {
     this.webSocket.deletedEnvironmentEmitter.subscribe(
       (deletedEnvironment) => {
 
-        this.messages.forEach((message, index) => {
-          if (message.deviceId === deletedEnvironment) {
-            this.messages.splice(index, 1);
-          }
-        });
+        this.messages = this.messages.filter(m => m.deviceId !== deletedEnvironment);
 
       });
 

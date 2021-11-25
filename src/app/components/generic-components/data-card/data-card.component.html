@@ -1,4 +1,4 @@
-<div class="card card-stats" style="border: 3px solid var(--success)">
+<div class="card card-stats" style="border: 3px solid var(--primary)">
     <div class="card-body">
         <div class="numbers">
             <p class="card-category">{{cardTitle}}</p>
@@ -11,7 +11,7 @@
             <div class="stats">
                 <div>
                     <p class="card-footer-title">
-                        <i [class]="'text-success mr-2 ' + subCardIcon"></i>
+                        <i [class]="'mr-2 ' + subCardIcon" style="color: var(--primary)"></i>
 
                         <ng2-odometer [format]="'d'" [number]="subCardData"></ng2-odometer>
 

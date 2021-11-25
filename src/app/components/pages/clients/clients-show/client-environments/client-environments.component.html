@@ -39,7 +39,7 @@
         </div>
 
         <div class="col-md-2">
-          <button class="btn btn-block full-width-mobile btn-success pull-right" type="submit">
+          <button class="btn btn-block full-width-mobile btn-success pull-right" type="submit" [disabled]="creatingEnvironment">
             <i class="fa fa-check"
               [ngClass]="{'fa-check': !creatingEnvironment, 'fa-spin': creatingEnvironment, 'fa-spinner': creatingEnvironment}"></i>
           </button>

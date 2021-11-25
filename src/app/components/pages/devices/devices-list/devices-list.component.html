@@ -31,8 +31,11 @@
                 {{ device.id }}
               </td>
               <td>
-                <button class="btn btn-info btn-sm"
-                  routerLink="../../clients/show/{{device.environment.clientId}}">{{ device.environment.clientId }}</button>
+                <button class="btn btn-outline btn-sm"
+                  routerLink="../../clients/show/{{device.environment.clientId}}">
+                  Cliente 
+                  {{ device.environment.clientId }}
+                </button>
               </td>
               <td>
                 {{device.environment.title }}
@@ -43,7 +46,7 @@
               <td>
                 <button 
                 [disabled]="device.messages?.length <= 0" 
-                class="btn btn-sm btn-success"
+                class="btn btn-sm btn-default"
                 (click)="device.show_messages = !device.show_messages"
                 [title]="device.messages?.length <= 0 ? 'Nenhuma mensagem registrada nesse dispositivo' : 'Abrir histórico de mensagens'">
                   <i class="fa fa-search"></i>

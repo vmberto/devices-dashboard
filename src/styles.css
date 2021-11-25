@@ -6,10 +6,10 @@
 @import './assets/all-styles/utils.css';
 
 :root {
-  --main-color: #f8f9fe;
+  --main-color: #fff;
   --lighter-color: #fff;
 
-  --secondary-color: #00A24C;  
+  --secondary-color: #BDAC75;  
   
   
   --font-color: #e7e7e7;
@@ -19,14 +19,25 @@
   --primary-selected: #00448d;
 
 
-  --primary: #00A24C!important;
+  --primary: #690013!important;
 
-  --success-color: #007235;
+  --success-color: #C69532;
   --danger-color: #FF2419;
   --info-color: #19b0c7 ;
   
 
-  --box-shadow: 0 0 2rem 0 rgba(136,152,170,.15)!important;
+  --box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)!important;
+}
+
+.btn-success {
+  background-color: #61FA53!important;
+  border-color: #61FA53!important;
+}
+
+.btn-default {
+  background-color: #46ACFA;
+  color: white;
+  border-color: #46ACFA;
 }
 
 

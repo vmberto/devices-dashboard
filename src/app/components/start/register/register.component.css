@@ -18,6 +18,10 @@
     color: white;
   }
 
+  .card-title img {
+    width: 75%;
+  }
+  
   .card-body{
     padding: 35px 70px;
   }
