@@ -98,9 +98,9 @@ export class ClientEnvironmentsComponent implements OnInit {
 
         this.webSocket.deletedEnvironmentEmitter.next(environment.id);
 
-        if (this.environments.length === 0) {
-          window.location.reload();
-        }
+        // if (this.environments.length === 0) {
+        //   window.location.reload();
+        // }
 
       });
 
