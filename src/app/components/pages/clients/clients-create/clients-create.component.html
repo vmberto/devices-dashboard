@@ -22,14 +22,14 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label>Nome</label>
-                <input formControlName="name" type="text" class="form-control" placeholder="Umberto Barros">
+                <input formControlName="name" type="text" class="form-control">
               </div>
             </div>
 
             <div class="col-md-4">
               <div class="form-group">
                 <label>Celular</label>
-                <input formControlName="phone" type="text" class="form-control" placeholder="99999 9999">
+                <input formControlName="phone" type="text" class="form-control">
               </div>
             </div>
 
@@ -43,8 +43,7 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label>CEP</label>
-                <input id="address-zip_code" formControlName="zip_code" (blur)="findCep()" type="text" class="form-control"
-                  placeholder="00000-000" maxlength="8">
+                <input id="address-zip_code" formControlName="zip_code" (blur)="findCep()" type="text" class="form-control" maxlength="8">
                 <button [@fade] type="button" class="pointer finding-cep" *ngIf="findingCep || cepFound" (click)="clearSelectedAddress()">
                   <i class="fa" [ngClass]="{'fa-spinner': findingCep, 'fa-spin': findingCep, 'fa-times': cepFound}"></i>
                 </button>
@@ -55,14 +54,14 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label>Cidade</label>
-                <input id="address-city" formControlName="city" type="text" class="form-control" placeholder="Recife">
+                <input id="address-city" formControlName="city" type="text" class="form-control">
               </div>
             </div>
 
             <div class="col-md-4">
               <div class="form-group">
                 <label>Bairro</label>
-                <input id="address-district" formControlName="district" type="text" class="form-control" placeholder="Tamarineira">
+                <input id="address-district" formControlName="district" type="text" class="form-control">
               </div>
             </div>
 
@@ -73,21 +72,21 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label>Rua</label>
-                <input id="address-street" formControlName="street" type="text" class="form-control" placeholder="Av. Caxangá">
+                <input id="address-street" formControlName="street" type="text" class="form-control">
               </div>
             </div>
 
             <div class="col-md-3">
               <div class="form-group">
                 <label>Número</label>
-                <input id="address-number" formControlName="number" type="text" class="form-control" placeholder="000">
+                <input id="address-number" formControlName="number" type="text" class="form-control">
               </div>
             </div>
 
             <div class="col-md-3">
               <div class="form-group">
                 <label>Complemento<small> &mdash; Opcional</small></label>
-                <input formControlName="complement" type="text" class="form-control" placeholder="Aptº 0000">
+                <input formControlName="complement" type="text" class="form-control">
               </div>
             </div>
 
