@@ -32,9 +32,8 @@
               </td>
               <td>
                 <button class="btn btn-outline btn-sm"
-                  routerLink="../../clients/show/{{device.environment.clientId}}">
-                  Cliente 
-                  {{ device.environment.clientId }}
+                  routerLink="../../clients/show/{{device.environment.clientId}}"> 
+                  {{ device.environment?.client?.name }}
                 </button>
               </td>
               <td>

@@ -22,7 +22,7 @@ export class DevicesListComponent extends ListComponent implements OnInit {
 
   public tableHeaders = [
     { title: 'Dispositivo', value: 'device', sortable: false },
-    { title: 'Identificador do Cliente', value: 'client', sortable: false },
+    { title: 'Cliente', value: 'client', sortable: false },
     { title: 'Ambiente', value: 'environment', sortable: false },
     { title: 'Criado', value: 'created_at', sortable: false }
   ];
