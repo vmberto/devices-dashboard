@@ -621,9 +621,9 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/umberto/Documents/sd/salvus-dashboard/src/styles.css */"./src/styles.css");
-__webpack_require__(/*! /Users/umberto/Documents/sd/salvus-dashboard/node_modules/font-awesome/css/font-awesome.min.css */"./node_modules/font-awesome/css/font-awesome.min.css");
-module.exports = __webpack_require__(/*! /Users/umberto/Documents/sd/salvus-dashboard/node_modules/bootstrap/dist/css/bootstrap.min.css */"./node_modules/bootstrap/dist/css/bootstrap.min.css");
+__webpack_require__(/*! /Users/umberto/Documents/sd/devices-dashboard/src/styles.css */"./src/styles.css");
+__webpack_require__(/*! /Users/umberto/Documents/sd/devices-dashboard/node_modules/font-awesome/css/font-awesome.min.css */"./node_modules/font-awesome/css/font-awesome.min.css");
+module.exports = __webpack_require__(/*! /Users/umberto/Documents/sd/devices-dashboard/node_modules/bootstrap/dist/css/bootstrap.min.css */"./node_modules/bootstrap/dist/css/bootstrap.min.css");
 
 
 /***/ })
