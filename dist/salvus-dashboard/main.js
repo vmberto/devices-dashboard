@@ -1623,6 +1623,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_services__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services */ "./src/app/services/index.ts");
 /* harmony import */ var src_app_services_webksocket_websocket_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services/webksocket/websocket.service */ "./src/app/services/webksocket/websocket.service.ts");
 /* harmony import */ var src_app_utils_validators_validators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/utils/validators/validators */ "./src/app/utils/validators/validators.ts");
+var __assign = (undefined && undefined.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1679,7 +1690,7 @@ var ClientEnvironmentsComponent = /** @class */ (function () {
                 _this.environmentForm.reset();
                 _this.creatingEnvironment = false;
                 _this.createEnvironmentToggle = false;
-                _this.webSocket.newEnvironmentEmitter.next(res.new_environment);
+                _this.webSocket.newEnvironmentEmitter.next(__assign({}, res.new_environment, { client: _this.shareDataService.client.name }));
             }, function () {
                 _this.creatingEnvironment = false;
             });

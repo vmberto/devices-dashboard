@@ -76,7 +76,7 @@ export class ClientEnvironmentsComponent implements OnInit {
             this.creatingEnvironment = false;
             this.createEnvironmentToggle = false;
 
-            this.webSocket.newEnvironmentEmitter.next(res.new_environment);
+            this.webSocket.newEnvironmentEmitter.next({...res.new_environment, client: this.shareDataService.client.name });
 
 
           },
