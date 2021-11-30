@@ -1690,7 +1690,7 @@ var ClientEnvironmentsComponent = /** @class */ (function () {
                 _this.environmentForm.reset();
                 _this.creatingEnvironment = false;
                 _this.createEnvironmentToggle = false;
-                _this.webSocket.newEnvironmentEmitter.next(__assign({}, res.new_environment, { client: _this.shareDataService.client.name }));
+                _this.webSocket.newEnvironmentEmitter.next(__assign({}, res.new_environment, { client: _this.shareDataService.client }));
             }, function () {
                 _this.creatingEnvironment = false;
             });
