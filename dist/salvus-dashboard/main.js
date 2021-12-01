@@ -1141,9 +1141,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_services__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services */ "./src/app/services/index.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var src_app_utils_validators_validators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/utils/validators/validators */ "./src/app/utils/validators/validators.ts");
-/* harmony import */ var src_app_utils_validators_errors_validators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/utils/validators/errors.validators */ "./src/app/utils/validators/errors.validators.ts");
-/* harmony import */ var src_app_utils_animations_animations__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/utils/animations/animations */ "./src/app/utils/animations/animations.ts");
+/* harmony import */ var src_app_utils_validators_errors_validators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/utils/validators/errors.validators */ "./src/app/utils/validators/errors.validators.ts");
+/* harmony import */ var src_app_utils_animations_animations__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/utils/animations/animations */ "./src/app/utils/animations/animations.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1153,7 +1152,6 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
 
 
 
@@ -1175,7 +1173,7 @@ var ClientsCreateComponent = /** @class */ (function () {
     }
     ClientsCreateComponent.prototype.ngOnInit = function () {
         this.patientForm = this.fb.group({
-            name: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, src_app_utils_validators_validators__WEBPACK_IMPORTED_MODULE_5__["nameValidator"]]],
+            name: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]],
             phone: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]],
             zip_code: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]],
             city: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]],
@@ -1265,14 +1263,14 @@ var ClientsCreateComponent = /** @class */ (function () {
             selector: 'app-create',
             template: __webpack_require__(/*! ./clients-create.component.html */ "./src/app/components/pages/clients/clients-create/clients-create.component.html"),
             styles: [__webpack_require__(/*! ./clients-create.component.css */ "./src/app/components/pages/clients/clients-create/clients-create.component.css")],
-            animations: [src_app_utils_animations_animations__WEBPACK_IMPORTED_MODULE_7__["fade"]]
+            animations: [src_app_utils_animations_animations__WEBPACK_IMPORTED_MODULE_6__["fade"]]
         }),
         __metadata("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormBuilder"],
             _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
             _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"],
             src_app_services__WEBPACK_IMPORTED_MODULE_2__["ClientsService"],
             src_app_services__WEBPACK_IMPORTED_MODULE_2__["SeekerService"],
-            src_app_utils_validators_errors_validators__WEBPACK_IMPORTED_MODULE_6__["FormValidatorErrors"]])
+            src_app_utils_validators_errors_validators__WEBPACK_IMPORTED_MODULE_5__["FormValidatorErrors"]])
     ], ClientsCreateComponent);
     return ClientsCreateComponent;
 }());

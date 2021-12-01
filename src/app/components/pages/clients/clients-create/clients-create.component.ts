@@ -39,7 +39,7 @@ export class ClientsCreateComponent implements OnInit {
   ngOnInit() {
 
     this.patientForm = this.fb.group({
-      name: ['', [Validators.required, nameValidator]],
+      name: ['', [Validators.required]],
       
       phone: ['', [Validators.required]],
 
